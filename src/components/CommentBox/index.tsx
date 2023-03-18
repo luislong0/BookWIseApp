@@ -1,0 +1,90 @@
+import { getLimitedText } from '@/src/utils/getLimitedText'
+import Image from 'next/image'
+import { useState } from 'react'
+import { AvatarWithGradient } from '../AvatarWithGradient'
+import { StarRating } from '../StarRating'
+import {
+  BookComment,
+  BookInfoBox,
+  BookTitleBox,
+  Container,
+  Header,
+  TextBox,
+  UserDescription,
+  UserInfoBox,
+} from './styles'
+
+interface CommentProps {
+  text: string
+  type: 'limited' | 'full'
+  hideText: boolean
+}
+
+export function CommentBox() {
+  const textObject = getLimitedText(
+    'Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh',
+  )
+
+  const [comment, setComment] = useState<CommentProps>(
+    textObject as CommentProps,
+  )
+
+  function toggleHideMessage(toggleOption: string) {
+    if (toggleOption === 'full') {
+      setComment({
+        type: 'full',
+        hideText: false,
+        text: 'Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh',
+      })
+    } else {
+      setComment({
+        type: 'limited',
+        hideText: true,
+        text: textObject.text,
+      })
+    }
+  }
+
+  return (
+    <Container>
+      <Header>
+        <UserInfoBox>
+          <AvatarWithGradient />
+          <UserDescription>
+            <span>Luis Otavio</span>
+            <span>Hoje</span>
+          </UserDescription>
+        </UserInfoBox>
+        <StarRating ratingNumber={2} />
+      </Header>
+      <BookComment>
+        <Image
+          src={'/o-hobbit.png'}
+          alt="book image"
+          width={110}
+          height={160}
+        />
+        <BookInfoBox>
+          <BookTitleBox>
+            <span>O Hobbit</span>
+            <span>J.R.R. Tolkien</span>
+          </BookTitleBox>
+          <TextBox>
+            <p>
+              {comment.text}{' '}
+              {comment.type === 'limited' && comment.hideText === true ? (
+                <button onClick={() => toggleHideMessage('full')}>
+                  ver mais
+                </button>
+              ) : (
+                <button onClick={() => toggleHideMessage('hide')}>
+                  ver menos
+                </button>
+              )}
+            </p>
+          </TextBox>
+        </BookInfoBox>
+      </BookComment>
+    </Container>
+  )
+}

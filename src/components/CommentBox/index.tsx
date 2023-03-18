@@ -2,6 +2,7 @@ import { getLimitedText } from '@/src/utils/getLimitedText'
 import Image from 'next/image'
 import { useState } from 'react'
 import { AvatarWithGradient } from '../AvatarWithGradient'
+import { RatingButton } from '../RatingButton'
 import { StarRating } from '../StarRating'
 import {
   BookComment,
@@ -55,7 +56,7 @@ export function CommentBox() {
             <span>Hoje</span>
           </UserDescription>
         </UserInfoBox>
-        <StarRating ratingNumber={2} />
+        <StarRating ratingNumber={3} />
       </Header>
       <BookComment>
         <Image
@@ -85,6 +86,7 @@ export function CommentBox() {
           </TextBox>
         </BookInfoBox>
       </BookComment>
+      <RatingButton />
     </Container>
   )
 }

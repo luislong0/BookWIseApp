@@ -6,7 +6,7 @@ export const Container = styled('div', {
   gap: '$8',
   alignItems: 'center',
   justifyContent: 'space-between',
-  width: '100%',
+  width: 610,
 
   padding: '$6',
 

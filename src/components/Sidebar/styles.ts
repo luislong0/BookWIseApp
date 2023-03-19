@@ -55,10 +55,20 @@ export const UserContainer = styled('div', {
     backgroundColor: 'transparent',
     border: 'none',
 
-    color: '$gray200',
+    color: '$gray300',
     fontSize: '$md',
     fontWeight: 'bold',
 
     fontFamily: '$default',
+    transition: 'all 0.3s ease-in',
+    cursor: 'pointer',
+
+    '&:hover': {
+      color: '$gray100',
+    },
+
+    svg: {
+      color: '$green100',
+    },
   },
 })

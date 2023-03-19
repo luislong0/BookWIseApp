@@ -12,4 +12,5 @@ export const StarButton = styled('button', {
   position: 'absolute',
   width: 16,
   height: 16,
+  cursor: 'pointer',
 })

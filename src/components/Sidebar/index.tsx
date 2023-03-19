@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Binoculars, SignIn, TrendUp, User } from 'phosphor-react'
+import { Binoculars, House, SignIn, User } from 'phosphor-react'
 import { LogoContainer, SidebarContainer, UserContainer } from './styles'
 import wiseAppLogo from '../../assets/book-heart.svg'
 import { ListElement } from './components/ListElement'
@@ -19,22 +19,17 @@ export function Sidebar({ page }: SidebarProps) {
       <ul>
         {page === 'home' ? (
           <ListElement
-            icon={<TrendUp size={24} weight="bold" />}
+            icon={<House size={24} weight="bold" />}
             description={'Início'}
             activatedStatus={'true'}
           />
         ) : (
           <ListElement
-            icon={<TrendUp size={24} weight="bold" />}
+            icon={<House size={24} weight="bold" />}
             description={'Início'}
             activatedStatus={'false'}
           />
         )}
-        {/* <ListElement
-          icon={<TrendUp size={24} weight="bold" />}
-          description={"Início"}
-          activatedStatus={"false"}
-        /> */}
         <ListElement
           icon={<Binoculars size={24} weight="bold" />}
           description={'Explorar'}
@@ -50,7 +45,7 @@ export function Sidebar({ page }: SidebarProps) {
       <UserContainer>
         <button>
           Fazer login
-          <SignIn size={20} />
+          <SignIn size={20} weight="bold" />
         </button>
       </UserContainer>
     </SidebarContainer>

@@ -5,13 +5,17 @@ import { StarButton, StarButtonContent } from './styles'
 
 export function RatingButton() {
   const ratingStarArray = Array.from({ length: 5 }, (_, i) => i + 1)
-  console.log(ratingStarArray)
 
   const [buttonValue, setButtonValue] = useState(0)
+  const [ratingVote, setRatingVote] = useState(0)
 
-  function handleHover(event: any) {
-    console.log(buttonValue)
+  function handleButtonHover(event: any) {
     setButtonValue(event.target.value)
+  }
+
+  function handleMakeVote(ratingVote: number) {
+    setRatingVote(buttonValue)
+    console.log('ratingVote:', ratingVote)
   }
 
   return (
@@ -20,7 +24,11 @@ export function RatingButton() {
         if (star <= buttonValue) {
           return (
             <StarButtonContent key={star}>
-              <StarButton value={star} onMouseOver={handleHover}>
+              <StarButton
+                value={star}
+                onMouseOver={handleButtonHover}
+                onClick={() => handleMakeVote(star)}
+              >
                 oi
               </StarButton>
               <Star weight="fill" size={16} />
@@ -29,7 +37,7 @@ export function RatingButton() {
         } else {
           return (
             <StarButtonContent key={star}>
-              <StarButton value={star} onMouseOver={handleHover}>
+              <StarButton value={star} onMouseOver={handleButtonHover}>
                 oi
               </StarButton>
               <Star weight="regular" size={16} />

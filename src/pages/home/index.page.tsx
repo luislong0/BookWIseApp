@@ -1,6 +1,7 @@
 import { CommentBox } from '@/src/components/CommentBox'
 import { Sidebar } from '@/src/components/Sidebar'
-import { House } from 'phosphor-react'
+import { TrendingBookCard } from '@/src/components/TrendingBookCard'
+import { CaretRight, House } from 'phosphor-react'
 import {
   Container,
   ContentContainer,
@@ -8,6 +9,7 @@ import {
   MyBooksContainer,
   SidebarSession,
   TrendingBooksContainer,
+  TrendingBooksTitle,
 } from './styles'
 
 export default function Home() {
@@ -18,17 +20,31 @@ export default function Home() {
           <Sidebar page={'home'} />
         </SidebarSession>
 
-        <ContentContainer>
+        <div>
           <HomeTitle>
             <House size={32} weight="bold" />
             Início
           </HomeTitle>
-          <MyBooksContainer>
-            <span>Avaliações mais recentes</span>
-            <CommentBox />
-          </MyBooksContainer>
-          <TrendingBooksContainer></TrendingBooksContainer>
-        </ContentContainer>
+          <ContentContainer>
+            <MyBooksContainer>
+              <span>Avaliações mais recentes</span>
+              <CommentBox />
+            </MyBooksContainer>
+            <TrendingBooksContainer>
+              <TrendingBooksTitle>
+                <span>Livros populares</span>
+                <button>
+                  Ver todos
+                  <CaretRight weight="bold" />
+                </button>
+              </TrendingBooksTitle>
+
+              <TrendingBookCard />
+              <TrendingBookCard />
+              <TrendingBookCard />
+            </TrendingBooksContainer>
+          </ContentContainer>
+        </div>
       </Container>
     </>
   )

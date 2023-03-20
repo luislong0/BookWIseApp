@@ -64,6 +64,7 @@ export const BookTitleBox = styled('div', {
     '&:first-child': {
       fontSize: '$xl',
       color: '$gray100',
+      fontWeight: 'bold',
     },
     '&:last-child': {
       fontSize: '$md',
@@ -76,7 +77,7 @@ export const TextBox = styled('div', {
   p: {
     fontSize: '$sm',
     lineHeight: '$base',
-    color: '$gray400',
+    color: '$gray300',
   },
 
   button: {

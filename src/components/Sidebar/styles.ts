@@ -72,3 +72,15 @@ export const UserContainer = styled('div', {
     },
   },
 })
+
+export const UserInfoButtonBox = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '$3',
+
+  button: {
+    svg: {
+      color: '$danger',
+    },
+  },
+})

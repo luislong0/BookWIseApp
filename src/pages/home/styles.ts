@@ -42,6 +42,12 @@ export const HomeTitle = styled('span', {
 
 export const MyBooksContainer = styled('div', {
   display: 'flex',
+  gap: '$10',
+  flexDirection: 'column',
+})
+
+export const RecentBooksContainer = styled('div', {
+  display: 'flex',
   flexDirection: 'column',
   gap: '$3',
   width: '38.125rem',
@@ -52,6 +58,43 @@ export const MyBooksContainer = styled('div', {
     fontSize: '$sm',
   },
 })
+
+export const LastReadingContainer = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '$3',
+  width: '38.125rem',
+})
+
+export const TitleBox = styled('div', {
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'space-between',
+
+  span: {
+    marginBottom: '$1',
+    color: '$gray100',
+    fontSize: '$sm',
+  },
+
+  button: {
+    color: '$purple100',
+    fontWeight: '$bold',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '$2',
+    backgroundColor: 'transparent',
+    border: 'none',
+    transition: 'all 0.2s ease-in-out',
+
+    fontSize: '$sm',
+
+    '&:hover': {
+      color: '$gray200',
+    },
+  },
+})
+
 export const TrendingBooksContainer = styled('div', {
   width: '20.32rem',
 
@@ -75,6 +118,7 @@ export const TrendingBooksTitle = styled('div', {
   button: {
     display: 'flex',
     alignItems: 'center',
+    gap: '$2',
 
     backgroundColor: 'transparent',
     border: 'none',

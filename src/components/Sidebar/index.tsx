@@ -1,14 +1,21 @@
 import Image from 'next/image'
-import { Binoculars, House, SignIn, User } from 'phosphor-react'
-import { LogoContainer, SidebarContainer, UserContainer } from './styles'
+import { Binoculars, House, SignIn, SignOut, User } from 'phosphor-react'
+import {
+  LogoContainer,
+  SidebarContainer,
+  UserContainer,
+  UserInfoButtonBox,
+} from './styles'
 import wiseAppLogo from '../../assets/book-heart.svg'
 import { ListElement } from './components/ListElement'
+import { AvatarWithGradient } from '../AvatarWithGradient'
 
 interface SidebarProps {
   page: string
+  isLoggedIn: boolean
 }
 
-export function Sidebar({ page }: SidebarProps) {
+export function Sidebar({ page, isLoggedIn }: SidebarProps) {
   return (
     <SidebarContainer>
       <LogoContainer>
@@ -43,10 +50,25 @@ export function Sidebar({ page }: SidebarProps) {
       </ul>
 
       <UserContainer>
-        <button>
+        {isLoggedIn === true ? (
+          <UserInfoButtonBox>
+            <AvatarWithGradient imgWidth={30} imgHeight={30} imgSize="sm" />
+            <button>
+              Cristofer
+              <SignOut size={20} weight="bold" />
+            </button>
+          </UserInfoButtonBox>
+        ) : (
+          <button>
+            Fazer login
+            <SignIn size={20} weight="bold" />
+          </button>
+        )}
+
+        {/* <button>
           Fazer login
           <SignIn size={20} weight="bold" />
-        </button>
+        </button> */}
       </UserContainer>
     </SidebarContainer>
   )

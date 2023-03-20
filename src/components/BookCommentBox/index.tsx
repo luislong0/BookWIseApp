@@ -21,7 +21,7 @@ interface CommentProps {
   hideText: boolean
 }
 
-export function CommentBox() {
+export function BookCommentBox() {
   const textObject = getLimitedText(
     'Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh',
   )
@@ -50,7 +50,7 @@ export function CommentBox() {
     <Container>
       <Header>
         <UserInfoBox>
-          <AvatarWithGradient />
+          <AvatarWithGradient imgWidth={45} imgHeight={45} imgSize="md" />
           <UserDescription>
             <span>Luis Otavio</span>
             <span>Hoje</span>

@@ -37,11 +37,20 @@ export function Sidebar({ page, isLoggedIn }: SidebarProps) {
             activatedStatus={'false'}
           />
         )}
-        <ListElement
-          icon={<Binoculars size={24} weight="bold" />}
-          description={'Explorar'}
-          activatedStatus={'false'}
-        />
+        {page === 'explore' ? (
+          <ListElement
+            icon={<Binoculars size={24} weight="bold" />}
+            description={'Explorar'}
+            activatedStatus={'true'}
+          />
+        ) : (
+          <ListElement
+            icon={<Binoculars size={24} weight="bold" />}
+            description={'Explorar'}
+            activatedStatus={'false'}
+          />
+        )}
+
         <ListElement
           icon={<User size={24} weight="bold" />}
           description={'Perfil'}

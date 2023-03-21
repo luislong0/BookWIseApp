@@ -84,7 +84,7 @@ export default function Explore() {
             <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
             <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
             <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
-            <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
+            <BookCard bookAuthor="J.R.R. Tolkien a" bookTitle="O Hobbit" />
             <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
           </BooksContainer>
         </ContentContainer>

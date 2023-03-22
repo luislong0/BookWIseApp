@@ -1,4 +1,5 @@
 import { styled } from '@/src/styles/stiches.config'
+import * as Dialog from '@radix-ui/react-dialog'
 
 export const Container = styled('div', {
   maxWidth: 1440,
@@ -7,6 +8,8 @@ export const Container = styled('div', {
   display: 'flex',
   // justifyContent: 'center',
   margin: '0 auto',
+  padding: '-20px',
+  marginTop: '20px',
 })
 
 export const SidebarSession = styled('div', {
@@ -86,4 +89,9 @@ export const BooksContainer = styled('div', {
   gridTemplateColumns: 'repeat(3, 1fr)',
   gap: '$5',
   marginTop: '$10',
+})
+
+export const Trigger = styled(Dialog.Trigger, {
+  backgroundColor: 'transparent',
+  border: 'none',
 })

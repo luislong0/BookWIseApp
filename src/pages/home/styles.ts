@@ -7,7 +7,7 @@ export const Container = styled('div', {
   display: 'flex',
   // justifyContent: 'center',
   // backgroundColor: 'Red',
-  margin: '0 auto',
+  margin: '20px auto 0',
 })
 export const SidebarSession = styled('div', {
   maxWidth: '14.5rem',

@@ -4,6 +4,7 @@ export const Container = styled('div', {
   maxWidth: 1440,
   margin: '0 auto',
   display: 'flex',
+  marginTop: '$5',
 })
 
 export const BannerContainer = styled('div', {

@@ -22,9 +22,10 @@ interface CommentProps {
 }
 
 export function BookCommentBox() {
-  const textObject = getLimitedText(
-    'Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh',
-  )
+  const textObject = getLimitedText({
+    text: 'Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh',
+    letterLimit: 220,
+  })
 
   const [comment, setComment] = useState<CommentProps>(
     textObject as CommentProps,

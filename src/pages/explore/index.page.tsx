@@ -1,6 +1,9 @@
 import { Input } from '@/src/components/Input'
 import { Sidebar } from '@/src/components/Sidebar'
+import { getLimitedText } from '@/src/utils/getLimitedText'
 import { Binoculars } from 'phosphor-react'
+import * as Dialog from '@radix-ui/react-dialog'
+
 import { useState } from 'react'
 import { BookCard } from './components/BookCard'
 import {
@@ -11,8 +14,10 @@ import {
   HeaderContainer,
   SidebarSession,
   TitleContainer,
+  Trigger,
   TypeButton,
 } from './styles'
+import { SelectedButtonModal } from '@/src/components/SelectedButtonModal'
 
 const bookTypes = [
   'Tudo',
@@ -32,6 +37,11 @@ export default function Explore() {
   function handleSelectType(type: string) {
     setSelectedType(type)
   }
+
+  const validateText = getLimitedText({
+    text: '14 Hábitos de Desenvolvedores Altamente Produtivos',
+    letterLimit: 27,
+  })
 
   return (
     <>
@@ -76,16 +86,20 @@ export default function Explore() {
             })}
           </BookTypesContainer>
           <BooksContainer>
-            <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
-            <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
-            <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
-            <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
+            <Dialog.Root>
+              <Trigger>
+                <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
+              </Trigger>
+              <SelectedButtonModal />
+            </Dialog.Root>
+
+            {/* <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
             <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
             <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
             <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
             <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
             <BookCard bookAuthor="J.R.R. Tolkien a" bookTitle="O Hobbit" />
-            <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
+            <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" /> */}
           </BooksContainer>
         </ContentContainer>
       </Container>

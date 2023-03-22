@@ -22,6 +22,7 @@ export const BookInfoContainer = styled('div', {
 export const TitleBox = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'flex-start',
 
   span: {
     '&:first-child': {

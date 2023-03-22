@@ -28,12 +28,14 @@ export function Sidebar({ page, isLoggedIn }: SidebarProps) {
           <ListElement
             icon={<House size={24} weight="bold" />}
             description={'Início'}
+            href={'/home'}
             activatedStatus={'true'}
           />
         ) : (
           <ListElement
             icon={<House size={24} weight="bold" />}
             description={'Início'}
+            href={'/home'}
             activatedStatus={'false'}
           />
         )}
@@ -41,21 +43,27 @@ export function Sidebar({ page, isLoggedIn }: SidebarProps) {
           <ListElement
             icon={<Binoculars size={24} weight="bold" />}
             description={'Explorar'}
+            href={'/explore'}
             activatedStatus={'true'}
           />
         ) : (
           <ListElement
             icon={<Binoculars size={24} weight="bold" />}
             description={'Explorar'}
+            href={'/explore'}
             activatedStatus={'false'}
           />
         )}
-
-        <ListElement
-          icon={<User size={24} weight="bold" />}
-          description={'Perfil'}
-          activatedStatus={'false'}
-        />
+        {isLoggedIn === true ? (
+          <ListElement
+            icon={<User size={24} weight="bold" />}
+            description={'Perfil'}
+            href={'/profile'}
+            activatedStatus={'false'}
+          />
+        ) : (
+          <></>
+        )}
       </ul>
 
       <UserContainer>

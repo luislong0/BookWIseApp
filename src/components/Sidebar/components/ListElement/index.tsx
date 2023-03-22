@@ -1,29 +1,18 @@
-import { useRouter } from 'next/router'
 import { Container, GradientBar, ListButton } from './styles'
 
 interface ListElementProps {
   icon: any
   description: string
   activatedStatus: 'true' | 'false'
+  href: string
 }
 
 export function ListElement({
   icon,
   description,
   activatedStatus,
+  href,
 }: ListElementProps) {
-  const router = useRouter()
-
-  async function handleGoToPage(pageName: string) {
-    if (pageName === 'Início') {
-      await router.push('/home')
-    } else if (pageName === 'Explorar') {
-      await router.push('/explore')
-    } else if (pageName === 'Perfil') {
-      await router.push('/profile')
-    }
-  }
-
   return (
     <Container>
       {activatedStatus === 'true' ? (
@@ -31,10 +20,7 @@ export function ListElement({
       ) : (
         <GradientBar color={'transparent'} />
       )}
-      <ListButton
-        activated={activatedStatus}
-        onClick={() => handleGoToPage(description)}
-      >
+      <ListButton href={href} activated={activatedStatus}>
         {icon}
         {description}
       </ListButton>

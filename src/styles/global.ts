@@ -9,7 +9,7 @@ export const globalStyles = globalCss({
 
   body: {
     backgroundColor: '$gray800',
-    padding: '$5',
+    padding: '0 $5 $5 $5',
     color: '$gray100',
     '-webkit-font-smoothing': 'antialiased',
     fontFamily: 'Nunito',

@@ -1,11 +1,12 @@
 import { styled } from '@/src/styles/stiches.config'
+import Link from 'next/link'
 
 export const Container = styled('div', {
   display: 'flex',
   alignItems: 'center',
   gap: '$4',
 })
-export const ListButton = styled('button', {
+export const ListButton = styled(Link, {
   variants: {
     activated: {
       true: {
@@ -27,6 +28,7 @@ export const ListButton = styled('button', {
 
   cursor: 'pointer',
   fontSize: '$md',
+  textDecoration: 'none',
 
   '&:hover': {
     color: '$gray100',

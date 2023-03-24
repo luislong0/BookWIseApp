@@ -28,10 +28,10 @@ export const HeaderContainer = styled('header', {
   alignItems: 'center',
   justifyContent: 'space-between',
   marginTop: '2rem',
+})
 
-  form: {
-    width: '27.18rem',
-  },
+export const InputContainer = styled('div', {
+  width: '27.18rem',
 })
 
 export const TitleContainer = styled('div', {

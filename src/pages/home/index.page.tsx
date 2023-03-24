@@ -19,7 +19,7 @@ import {
 } from './styles'
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
     <>

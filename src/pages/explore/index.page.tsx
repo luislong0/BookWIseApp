@@ -12,6 +12,7 @@ import {
   Container,
   ContentContainer,
   HeaderContainer,
+  InputContainer,
   SidebarSession,
   TitleContainer,
   Trigger,
@@ -31,7 +32,7 @@ const bookTypes = [
 ]
 
 export default function Explore() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [selectedType, setSelectedType] = useState('')
 
   function handleSelectType(type: string) {
@@ -55,10 +56,9 @@ export default function Explore() {
               <Binoculars size={32} weight="bold" />
               <span>Explorar</span>
             </TitleContainer>
-
-            <form>
-              <Input />
-            </form>
+            <InputContainer>
+              <Input inputPage={'explore'} />
+            </InputContainer>
           </HeaderContainer>
           <BookTypesContainer>
             {bookTypes.map((bookType, i) => {

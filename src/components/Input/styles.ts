@@ -21,6 +21,10 @@ export const InputBox = styled('div', {
     color: '$gray500',
   },
 
+  form: {
+    width: '100%',
+  },
+
   input: {
     width: '100%',
     padding: '14px 20px',

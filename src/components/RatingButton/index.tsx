@@ -1,20 +1,22 @@
+import { BookContext } from '@/src/contexts/BookContext'
 import { Star } from 'phosphor-react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { StarRatingBox } from '../StarRating/styles'
 import { StarButton, StarButtonContent } from './styles'
 
 export function RatingButton() {
+  const { handleSetBookRating } = useContext(BookContext)
+
   const ratingStarArray = Array.from({ length: 5 }, (_, i) => i + 1)
 
   const [buttonValue, setButtonValue] = useState(0)
-  const [ratingVote, setRatingVote] = useState(0)
 
   function handleButtonHover(event: any) {
     setButtonValue(event.target.value)
   }
 
   function handleMakeVote(ratingVote: number) {
-    setRatingVote(buttonValue)
+    handleSetBookRating(ratingVote)
     console.log('ratingVote:', ratingVote)
   }
 

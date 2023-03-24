@@ -10,7 +10,7 @@ export const StarButton = styled('button', {
   color: 'transparent',
   border: 'none',
   position: 'absolute',
-  width: 16,
-  height: 16,
+  width: 28,
+  height: 28,
   cursor: 'pointer',
 })

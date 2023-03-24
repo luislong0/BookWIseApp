@@ -1,4 +1,5 @@
 import { styled } from '@/src/styles/stiches.config'
+import Link from 'next/link'
 
 export const Container = styled('div', {
   maxWidth: 1440,
@@ -90,7 +91,7 @@ export const TitleBox = styled('div', {
     fontSize: '$sm',
 
     '&:hover': {
-      color: '$gray200',
+      color: '$green100',
     },
   },
 })
@@ -115,20 +116,21 @@ export const TrendingBooksTitle = styled('div', {
     fontSize: '$sm',
   },
 
-  button: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '$2',
+  button: {},
+})
 
-    backgroundColor: 'transparent',
-    border: 'none',
-    fontSize: '$sm',
-    fontWeight: 'bold',
-    color: '$purple100',
-    transition: 'all 0.2s ease-out',
+export const HeaderLink = styled(Link, {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '$2',
 
-    '&:hover': {
-      color: '$gray200',
-    },
+  fontSize: '$sm',
+  fontWeight: 'bold',
+  color: '$purple100',
+  textDecoration: 'none',
+  transition: 'all 0.2s ease-out',
+
+  '&:hover': {
+    color: '$green100',
   },
 })

@@ -31,7 +31,7 @@ export function RatingButton() {
               >
                 oi
               </StarButton>
-              <Star weight="fill" size={16} />
+              <Star weight="fill" size={28} />
             </StarButtonContent>
           )
         } else {
@@ -40,7 +40,7 @@ export function RatingButton() {
               <StarButton value={star} onMouseOver={handleButtonHover}>
                 oi
               </StarButton>
-              <Star weight="regular" size={16} />
+              <Star weight="regular" size={28} />
             </StarButtonContent>
           )
         }

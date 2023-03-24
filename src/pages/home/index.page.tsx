@@ -7,6 +7,7 @@ import { LastReadingComment } from './components/LastReadingComment'
 import {
   Container,
   ContentContainer,
+  HeaderLink,
   HomeTitle,
   LastReadingContainer,
   MyBooksContainer,
@@ -38,10 +39,10 @@ export default function Home() {
                 <LastReadingContainer>
                   <TitleBox>
                     <span>Sua última leitura</span>
-                    <button>
+                    <HeaderLink href={'/home'}>
                       Ver todas
                       <CaretRight size={16} weight="bold" />
-                    </button>
+                    </HeaderLink>
                   </TitleBox>
                   <LastReadingComment />
                 </LastReadingContainer>
@@ -55,10 +56,10 @@ export default function Home() {
             <TrendingBooksContainer>
               <TrendingBooksTitle>
                 <span>Livros populares</span>
-                <button>
+                <HeaderLink href={'/explore'}>
                   Ver todos
-                  <CaretRight weight="bold" />
-                </button>
+                  <CaretRight size={16} weight="bold" />
+                </HeaderLink>
               </TrendingBooksTitle>
 
               <TrendingBookCard />

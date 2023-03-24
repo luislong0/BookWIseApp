@@ -8,40 +8,23 @@ export const Overlay = styled(Dialog.Overlay, {
   height: '100vh',
   inset: 0,
   backgroundColor: 'rgba(0, 0, 0, 0.60)',
+  // backgroundColor: 'Red',
+  zIndex: 2,
 })
 
 export const Content = styled(Dialog.Content, {
   fontFamily: 'Nunito',
-  maxWidth: 660,
+  maxWidth: 462,
   width: '100%',
-  height: '100vh',
-  padding: '$6 3rem',
-  backgroundColor: '$gray800',
+  padding: '4.5rem 3.5rem',
+  borderRadius: '$md',
+  backgroundColor: '$gray700',
   boxShadow: '-4px 1px 24px -6px rgba(0,0,0,0.86);',
-  overflowY: 'auto',
-
-  '&::-webkit-scrollbar-track': {
-    boxShadow: 'inset 0 0 14px 14px transparent',
-    border: 'solid 4px transparent',
-  },
-
-  '&::-webkit-scrollbar': {
-    width: 14,
-  },
-
-  '&::-webkit-scrollbar-thumb': {
-    boxShadow: 'inset 0 0 14px 14px #252D4A',
-    border: 'solid 4px transparent',
-    borderRadius: '14px',
-  },
-
-  '&::-webkit-scrollbar-button': {
-    display: 'none',
-  },
 
   position: 'fixed',
-  top: '0',
-  right: '0',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   zIndex: 2,
 })
 
@@ -56,6 +39,11 @@ export const CloseBtn = styled(Dialog.Close, {
   marginLeft: 'auto',
   marginBottom: '1rem',
 
+  top: 16,
+  right: 16,
+
+  position: 'absolute',
+
   cursor: 'pointer',
 
   '&:hover': {
@@ -63,24 +51,7 @@ export const CloseBtn = styled(Dialog.Close, {
   },
 })
 
-export const RatingsContainer = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-
-  marginTop: '$10',
-})
-export const RatingsContent = styled('div', {})
-export const RatingsContentHeader = styled('div', {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  marginBottom: '$6',
-
-  span: {
-    fontSize: '$sm',
-    color: '$gray200',
-  },
-
+export const Trigger = styled(Dialog.Trigger, {
   button: {
     backgroundColor: 'transparent',
     color: '$purple100',
@@ -94,4 +65,23 @@ export const RatingsContentHeader = styled('div', {
       color: '$green100',
     },
   },
+})
+
+export const LoginButtonsContainer = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  span: {
+    fontSize: '$md',
+    fontWeight: 'bold',
+    color: '$gray200',
+    marginBottom: '$10',
+  },
+})
+export const ButtonBox = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '$4',
 })

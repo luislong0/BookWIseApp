@@ -31,7 +31,7 @@ const bookTypes = [
 ]
 
 export default function Explore() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [selectedType, setSelectedType] = useState('')
 
   function handleSelectType(type: string) {
@@ -90,7 +90,7 @@ export default function Explore() {
               <Trigger>
                 <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
               </Trigger>
-              <SelectedButtonModal />
+              <SelectedButtonModal isLoggedIn={isLoggedIn} />
             </Dialog.Root>
 
             {/* <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />

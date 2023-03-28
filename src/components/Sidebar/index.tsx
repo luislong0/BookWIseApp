@@ -9,6 +9,9 @@ import {
 import wiseAppLogo from '../../assets/book-heart.svg'
 import { ListElement } from './components/ListElement'
 import { AvatarWithGradient } from '../AvatarWithGradient'
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { getLimitedText } from '@/src/utils/getLimitedText'
 
 interface SidebarProps {
   page: string
@@ -16,6 +19,12 @@ interface SidebarProps {
 }
 
 export function Sidebar({ page, isLoggedIn }: SidebarProps) {
+  const session = useSession()
+  const username = getLimitedText({
+    text: session.data?.user!.name ?? '',
+    letterLimit: 12,
+  })
+
   return (
     <SidebarContainer>
       <LogoContainer>
@@ -54,11 +63,22 @@ export function Sidebar({ page, isLoggedIn }: SidebarProps) {
             activatedStatus={'false'}
           />
         )}
-        {isLoggedIn === true ? (
+        {isLoggedIn === true && page === 'user' ? (
           <ListElement
             icon={<User size={24} weight="bold" />}
             description={'Perfil'}
-            href={'/profile'}
+            href={'/user'}
+            activatedStatus={'true'}
+          />
+        ) : (
+          <></>
+        )}
+
+        {session.data !== null && page !== 'user' ? (
+          <ListElement
+            icon={<User size={24} weight="bold" />}
+            description={'Perfil'}
+            href={'/user'}
             activatedStatus={'false'}
           />
         ) : (
@@ -67,11 +87,16 @@ export function Sidebar({ page, isLoggedIn }: SidebarProps) {
       </ul>
 
       <UserContainer>
-        {isLoggedIn === true ? (
+        {session.data !== null ? (
           <UserInfoButtonBox>
-            <AvatarWithGradient imgWidth={30} imgHeight={30} imgSize="sm" />
+            <AvatarWithGradient
+              url={session.data?.user!.image}
+              imgWidth={30}
+              imgHeight={30}
+              imgSize="sm"
+            />
+            <Link href={'/user'}>{username.text!}</Link>
             <button>
-              Cristofer
               <SignOut size={20} weight="bold" />
             </button>
           </UserInfoButtonBox>

@@ -15,8 +15,20 @@ import { LoginButton } from '@/src/components/LoginButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { RocketLaunch } from 'phosphor-react'
+import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 export default function Login() {
+  const session = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (session.data) {
+      router.push('/home')
+    }
+  }, [session])
+
   return (
     <>
       <Container>
@@ -50,6 +62,7 @@ export default function Login() {
                 colorVariant="purple"
                 loginType="visitant"
               />
+              {JSON.stringify(session.data)}
             </ButtonsContainer>
           </LoginBox>
         </LoginContainer>

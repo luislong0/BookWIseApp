@@ -78,6 +78,17 @@ export const UserInfoButtonBox = styled('div', {
   alignItems: 'center',
   gap: '$3',
 
+  a: {
+    textDecoration: 'none',
+    fontSize: '$md',
+    color: '$gray300',
+    transition: 'all ease-out 0.2s',
+
+    '&:hover': {
+      color: '$gray100',
+    },
+  },
+
   button: {
     svg: {
       color: '$danger',

@@ -24,6 +24,10 @@ export function Input({ inputPage }: InputProps) {
       console.log('in explore')
       console.log(data.searchData)
       reset()
+    } else if (inputPage === 'user') {
+      console.log('in user')
+      console.log(data.searchData)
+      reset()
     }
   }
 

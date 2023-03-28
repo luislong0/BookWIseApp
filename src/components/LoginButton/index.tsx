@@ -1,3 +1,4 @@
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { Button } from './styles'
 
@@ -19,6 +20,10 @@ export function LoginButton({
   async function handleLogin(option: string) {
     if (option === 'visitant') {
       await router.push('/home')
+    } else if (option === 'google') {
+      signIn('google')
+    } else if (option === 'github') {
+      signIn('github')
     }
   }
 

@@ -2,10 +2,10 @@ import Image from 'next/image'
 import { GradientContainer } from './styles'
 
 interface AvatarWithGradientProps {
-  url?: string
+  url?: string | null
   imgWidth?: number
   imgHeight?: number
-  imgSize?: 'sm' | 'md'
+  imgSize?: 'sm' | 'md' | 'lg'
 }
 
 export function AvatarWithGradient({
@@ -17,11 +17,12 @@ export function AvatarWithGradient({
   return (
     <GradientContainer size={imgSize}>
       <Image
-        src={'https://avatars.githubusercontent.com/u/100600769?v=4'}
+        src={url!}
         alt="User Photo"
         width={imgWidth}
         height={imgHeight}
         quality={100}
+        referrerPolicy="no-referrer"
       />
     </GradientContainer>
   )

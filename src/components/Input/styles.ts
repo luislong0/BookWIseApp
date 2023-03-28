@@ -8,6 +8,7 @@ export const InputBox = styled('div', {
   padding: '0px 20px',
   border: '2px solid $gray500',
   borderRadius: '$sm',
+  width: '100%',
 
   '&:has(input:focus)': {
     border: '2px solid $purple100',

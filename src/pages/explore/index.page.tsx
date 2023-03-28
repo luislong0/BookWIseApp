@@ -32,8 +32,8 @@ const bookTypes = [
 ]
 
 export default function Explore() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [selectedType, setSelectedType] = useState('')
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [selectedType, setSelectedType] = useState('Tudo')
 
   function handleSelectType(type: string) {
     setSelectedType(type)

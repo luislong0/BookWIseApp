@@ -11,6 +11,10 @@ export const GradientContainer = styled('div', {
         width: 50,
         height: 50,
       },
+      lg: {
+        width: 74,
+        height: 74,
+      },
     },
   },
 

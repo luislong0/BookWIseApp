@@ -1,6 +1,7 @@
 import { BookCommentBox } from '@/src/components/BookCommentBox'
 import { Sidebar } from '@/src/components/Sidebar'
 import { TrendingBookCard } from '@/src/components/TrendingBookCard'
+import { useSession } from 'next-auth/react'
 import { CaretRight, House } from 'phosphor-react'
 import { useState } from 'react'
 import { LastReadingComment } from './components/LastReadingComment'
@@ -20,6 +21,7 @@ import {
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const session = useSession()
 
   return (
     <>
@@ -35,11 +37,11 @@ export default function Home() {
           </HomeTitle>
           <ContentContainer>
             <MyBooksContainer>
-              {isLoggedIn === true && (
+              {session.data && (
                 <LastReadingContainer>
                   <TitleBox>
                     <span>Sua última leitura</span>
-                    <HeaderLink href={'/home'}>
+                    <HeaderLink href={'/user'}>
                       Ver todas
                       <CaretRight size={16} weight="bold" />
                     </HeaderLink>

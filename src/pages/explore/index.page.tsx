@@ -4,7 +4,7 @@ import { getLimitedText } from '@/src/utils/getLimitedText'
 import { Binoculars } from 'phosphor-react'
 import * as Dialog from '@radix-ui/react-dialog'
 
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { BookCard } from './components/BookCard'
 import {
   BooksContainer,
@@ -19,6 +19,7 @@ import {
   TypeButton,
 } from './styles'
 import { SelectedButtonModal } from '@/src/components/SelectedButtonModal'
+import { BookContext } from '@/src/contexts/BookContext'
 
 const bookTypes = [
   'Tudo',
@@ -32,17 +33,19 @@ const bookTypes = [
 ]
 
 export default function Explore() {
+  const { books, getAllBooks, getBookByCategory } = useContext(BookContext)
+
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [selectedType, setSelectedType] = useState('Tudo')
 
   function handleSelectType(type: string) {
     setSelectedType(type)
+    getBookByCategory(type)
   }
 
-  const validateText = getLimitedText({
-    text: '14 Hábitos de Desenvolvedores Altamente Produtivos',
-    letterLimit: 27,
-  })
+  useEffect(() => {
+    getAllBooks()
+  }, [])
 
   return (
     <>
@@ -86,12 +89,57 @@ export default function Explore() {
             })}
           </BookTypesContainer>
           <BooksContainer>
-            <Dialog.Root>
-              <Trigger>
-                <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
-              </Trigger>
-              <SelectedButtonModal isLoggedIn={isLoggedIn} />
-            </Dialog.Root>
+            {books.map((book, i) => {
+              const validateText = getLimitedText({
+                text: book.title,
+                letterLimit: 27,
+              })
+
+              if (book.avaliations.length !== 0) {
+                const sumWithInitial = book.avaliations.reduce(
+                  (accumulator: any, currentValue: any) =>
+                    accumulator + currentValue.ratingNumber,
+                  0,
+                )
+                const ratingMedia = Math.round(
+                  sumWithInitial / book.avaliations.length,
+                )
+
+                return (
+                  <Dialog.Root key={i}>
+                    <Trigger>
+                      <BookCard
+                        bookAuthor={book.author}
+                        bookTitle={validateText.text}
+                        bookRating={ratingMedia}
+                        bookImg={book.imageUrl}
+                      />
+                    </Trigger>
+                    <SelectedButtonModal
+                      isLoggedIn={isLoggedIn}
+                      bookId={book.id}
+                    />
+                  </Dialog.Root>
+                )
+              } else {
+                return (
+                  <Dialog.Root key={i}>
+                    <Trigger>
+                      <BookCard
+                        bookAuthor={book.author}
+                        bookTitle={validateText.text}
+                        bookRating={0}
+                        bookImg={book.imageUrl}
+                      />
+                    </Trigger>
+                    <SelectedButtonModal
+                      isLoggedIn={isLoggedIn}
+                      bookId={book.id}
+                    />
+                  </Dialog.Root>
+                )
+              }
+            })}
 
             {/* <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />
             <BookCard bookAuthor="J.R.R. Tolkien" bookTitle="O Hobbit" />

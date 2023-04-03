@@ -8,6 +8,10 @@ export const SelectedButtonCardContainer = styled('div', {
 export const BookInfo = styled('div', {
   display: 'flex',
   gap: '$8',
+
+  img: {
+    borderRadius: '$md',
+  },
 })
 export const InfoContainer = styled('div', {
   display: 'flex',

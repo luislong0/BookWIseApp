@@ -1,8 +1,11 @@
 import { AvatarWithGradient } from '@/src/components/AvatarWithGradient'
 import { RatingButton } from '@/src/components/RatingButton'
 import { BookContext } from '@/src/contexts/BookContext'
+import { UserContext } from '@/src/contexts/UserContext'
+import { api } from '@/src/lib/axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Nunito } from '@next/font/google'
+import { useSession } from 'next-auth/react'
 import { Check, X } from 'phosphor-react'
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
@@ -21,30 +24,54 @@ type CommentFormInput = z.infer<typeof commentFormSchema>
 
 interface CommentFormProps {
   handleHideCommentForm: () => void
+  bookId: string
 }
 
-export function CommentForm({ handleHideCommentForm }: CommentFormProps) {
+export function CommentForm({
+  handleHideCommentForm,
+  bookId,
+}: CommentFormProps) {
   const { register, handleSubmit } = useForm<CommentFormInput>({
     resolver: zodResolver(commentFormSchema),
   })
+  const session = useSession()
 
-  const { bookCommentRating } = useContext(BookContext)
+  const { bookCommentRating, handleUpdateComments } = useContext(BookContext)
+  const { loggedUser } = useContext(UserContext)
 
-  function handleMakeAComment(data: CommentFormInput) {
+  async function handleMakeAComment(data: CommentFormInput) {
     console.log({
       user: 'testUser',
       comment: data.comment,
       bookRating: bookCommentRating,
     })
     handleHideCommentForm()
+
+    try {
+      await api.post('/avaliation', {
+        userId: loggedUser.id,
+        bookId,
+        comment: data.comment,
+        ratingNumber: bookCommentRating,
+      })
+
+      handleUpdateComments()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (
     <CommentFormBox>
       <Header>
         <UserInfoBox>
-          <AvatarWithGradient imgHeight={45} imgWidth={45} imgSize={'md'} />
-          <span>Cristofer Rosser</span>
+          <AvatarWithGradient
+            imgHeight={44}
+            imgWidth={44}
+            imgSize={'md'}
+            url={session.data?.user!.image}
+          />
+          <span>{session.data?.user!.name}</span>
         </UserInfoBox>
         <RatingButton />
       </Header>

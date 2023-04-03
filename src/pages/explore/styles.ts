@@ -75,6 +75,7 @@ export const TypeButton = styled('button', {
   border: '1px solid $purple100',
   fontSize: '$sm',
   transition: 'all 0.2s ease-in-out',
+  cursor: 'pointer',
 
   '&:hover': {
     transition: 'all 0.2 ease-in-out',

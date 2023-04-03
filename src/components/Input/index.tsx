@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { InputBox } from './styles'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useContext } from 'react'
+import { BookContext } from '@/src/contexts/BookContext'
 
 const searchFormSchema = z.object({
   searchData: z.string(),
@@ -19,10 +21,13 @@ export function Input({ inputPage }: InputProps) {
     resolver: zodResolver(searchFormSchema),
   })
 
+  const { getBookByTheName } = useContext(BookContext)
+
   function handleSearchABook(data: SearchFormInputs) {
     if (inputPage === 'explore') {
       console.log('in explore')
       console.log(data.searchData)
+      getBookByTheName(data.searchData)
       reset()
     } else if (inputPage === 'user') {
       console.log('in user')

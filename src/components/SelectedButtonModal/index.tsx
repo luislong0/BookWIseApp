@@ -10,20 +10,43 @@ import {
 import { SelectedButtonCard } from './components/SelectedBookCard'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Nunito } from '@next/font/google'
-import { SimpleRatingBox } from './components/SimpleRatingComment'
+import { SimpleRatingComments } from './components/SimpleRatingComments'
 import { LoginToRateModal } from '../LoginToRateModal'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CommentForm } from './components/CommentForm'
+import { api } from '@/src/lib/axios'
+import { BookContext } from '@/src/contexts/BookContext'
 
 interface SelectedButtonModalProps {
   isLoggedIn: boolean
+  bookId: string
+}
+
+interface BookAvaliationsProps {
+  id: string
+  userId: string
+  bookId: string
+  comment: string
+  ratingNumber: number
+  User: {
+    name: string
+    image: string
+  }
 }
 
 const nunito = Nunito({
   subsets: ['latin'],
 })
-export function SelectedButtonModal({ isLoggedIn }: SelectedButtonModalProps) {
+export function SelectedButtonModal({
+  isLoggedIn,
+  bookId,
+}: SelectedButtonModalProps) {
   const [makeAComment, setMakeAComment] = useState(false)
+  const [bookAvaliations, setBookAvaliations] = useState<
+    BookAvaliationsProps[]
+  >([] as BookAvaliationsProps[])
+
+  const { updateCommentsToggle } = useContext(BookContext)
 
   function ToggleHideCommentForm() {
     if (makeAComment === false) {
@@ -33,6 +56,17 @@ export function SelectedButtonModal({ isLoggedIn }: SelectedButtonModalProps) {
     }
   }
 
+  async function getRatingComments(bookId: string) {
+    const avaliationsResponse = await api.get(`/avaliation/bookid`, {
+      params: { bookId },
+    })
+    setBookAvaliations(avaliationsResponse.data.avaliations)
+  }
+
+  useEffect(() => {
+    getRatingComments(bookId)
+  }, [bookId, updateCommentsToggle])
+
   return (
     <Dialog.Portal>
       <Overlay />
@@ -40,7 +74,7 @@ export function SelectedButtonModal({ isLoggedIn }: SelectedButtonModalProps) {
         <CloseBtn>
           <X size={24} weight="bold" />
         </CloseBtn>
-        <SelectedButtonCard />
+        <SelectedButtonCard bookId={bookId} />
         <RatingsContainer>
           <RatingsContent>
             <RatingsContentHeader>
@@ -61,9 +95,23 @@ export function SelectedButtonModal({ isLoggedIn }: SelectedButtonModalProps) {
               )}
             </RatingsContentHeader>
             {makeAComment === true && (
-              <CommentForm handleHideCommentForm={ToggleHideCommentForm} />
+              <CommentForm
+                handleHideCommentForm={ToggleHideCommentForm}
+                bookId={bookId}
+              />
             )}
-            <SimpleRatingBox />
+            {Array.isArray(bookAvaliations) === true &&
+              bookAvaliations!.map((bookAvaliation, i) => {
+                return (
+                  <SimpleRatingComments
+                    key={bookAvaliation.id}
+                    name={bookAvaliation.User.name}
+                    imgUrl={bookAvaliation.User.image}
+                    comment={bookAvaliation.comment}
+                    commentRate={bookAvaliation.ratingNumber}
+                  />
+                )
+              })}
           </RatingsContent>
         </RatingsContainer>
       </Content>

@@ -9,6 +9,8 @@ export const Container = styled('div', {
   backgroundColor: '$gray700',
   borderRadius: '$md',
 
+  marginBottom: '$3',
+
   p: {
     lineHeight: '$base',
     fontSize: '$sm',

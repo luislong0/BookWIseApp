@@ -6,7 +6,7 @@ export const BookCardContainer = styled('div', {
   borderRadius: '$md',
   display: 'flex',
   gap: '$5',
-  padding: '$4 $5',
+  padding: '$6 $5 $4',
   position: 'relative',
   transition: 'all 0.2s ease-in-out',
 
@@ -27,6 +27,7 @@ export const TitleBox = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
+  textAlign: 'start',
 
   span: {
     '&:first-child': {

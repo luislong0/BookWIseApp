@@ -44,11 +44,10 @@ model User {
   emailVerified DateTime?
   image         String?
   created_at    DateTime  @default(now())
-  avaliationId  String?
 
-  accounts   Account[]
-  sessions   Session[]
-  Avaliation Avaliation? @relation(fields: [avaliationId], references: [id])
+  accounts    Account[]
+  sessions    Session[]
+  avaliations Avaliation[]
 }
 
 model VerificationToken {
@@ -60,20 +59,26 @@ model VerificationToken {
 }
 
 model Book {
-  id           String  @id @default(uuid())
-  title        String
-  author       String
-  description  String
-  imageUrl     String?
-  categoryOne  String
-  categoryTwo  String?
-  avaliationId String?
+  id          String  @id @default(uuid())
+  title       String
+  author      String
+  description String
+  pagesNumber Int?
+  imageUrl    String
+  categoryOne String
+  categoryTwo String?
 
-  Avaliation Avaliation? @relation(fields: [avaliationId], references: [id])
+  avaliations Avaliation[]
 }
 
 model Avaliation {
-  id    String @id @default(uuid())
-  users User[]
-  books Book[]
+  id           String   @id @default(uuid())
+  userId       String?
+  bookId       String?
+  comment      String
+  ratingNumber Int
+  created_at   DateTime @default(now())
+
+  User User? @relation(fields: [userId], references: [id])
+  Book Book? @relation(fields: [bookId], references: [id])
 }

@@ -9,8 +9,26 @@ export default async function handler(
 ) {
   const bookTitle = String(req.query.bookTitle)
 
+  if (req.method !== 'GET') {
+    return res.status(405).end()
+  }
+
   if (bookTitle === 'undefined') {
-    const book = await prisma.book.findMany()
+    // const book = await prisma.book.findMany()
+    const book = await prisma.book.findMany({
+      include: {
+        avaliations: {
+          select: {
+            ratingNumber: true,
+            User: {
+              select: {
+                id: true,
+              },
+            },
+          },
+        },
+      },
+    })
     return res.json({ book })
   } else {
     const book = await prisma.book.findMany({
@@ -19,8 +37,19 @@ export default async function handler(
           contains: bookTitle,
         },
       },
+      include: {
+        avaliations: {
+          select: {
+            ratingNumber: true,
+            User: {
+              select: {
+                id: true,
+              },
+            },
+          },
+        },
+      },
     })
-
     return res.json({ book })
   }
 }

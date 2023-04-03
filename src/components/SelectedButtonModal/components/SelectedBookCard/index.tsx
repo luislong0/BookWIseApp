@@ -1,6 +1,8 @@
 import { StarRating } from '@/src/components/StarRating'
+import { BookContext } from '@/src/contexts/BookContext'
 import Image from 'next/image'
 import { BookmarkSimple, BookOpen } from 'phosphor-react'
+import { useContext, useEffect } from 'react'
 import {
   BookCategoryAndPageContainer,
   BookInfo,
@@ -14,25 +16,46 @@ import {
   TitleContainer,
 } from './styles'
 
-export function SelectedButtonCard() {
+interface SelectedButtonCardProps {
+  bookId: string
+}
+
+export function SelectedButtonCard({ bookId }: SelectedButtonCardProps) {
+  const {
+    getBookById,
+    selectedBook,
+    getSelectedBookRating,
+    selectedBookRating,
+  } = useContext(BookContext)
+
+  useEffect(() => {
+    getBookById(bookId)
+    getSelectedBookRating(bookId)
+    console.log(selectedBookRating)
+  }, [bookId])
+
   return (
     <SelectedButtonCardContainer>
       <BookInfo>
         <Image
-          src={'/o-hobbit.png'}
+          src={selectedBook.imageUrl}
           alt="book image"
           width={172}
           height={242}
         />
         <InfoContainer>
           <TitleContainer>
-            <span>14 Hábitos de Desenvolvedores Altamente Produtivos</span>
-            <span>Zeno Rocha</span>
+            <span>{selectedBook.title}</span>
+            <span>{selectedBook.author}</span>
           </TitleContainer>
 
           <RatingContainer>
-            <StarRating ratingNumber={3} />
-            <span>3 avaliações</span>
+            <StarRating ratingNumber={selectedBookRating} />
+
+            <span>
+              {Array.isArray(selectedBook.avaliations) === true &&
+                `${selectedBook.avaliations.length} avaliações`}
+            </span>
           </RatingContainer>
         </InfoContainer>
       </BookInfo>
@@ -41,14 +64,18 @@ export function SelectedButtonCard() {
           <BookmarkSimple size={24} weight="bold" />
           <CategoryInfoBox>
             <span>Categoria</span>
-            <span>Computação, educação</span>
+            <span>
+              {selectedBook.categoryTwo !== null
+                ? `${selectedBook.categoryOne}, ${selectedBook.categoryTwo}`
+                : `${selectedBook.categoryOne}`}
+            </span>
           </CategoryInfoBox>
         </CategoryBox>
         <PageCountBox>
           <BookOpen size={24} weight="bold" />
           <PageCountInfoBox>
             <span>Páginas</span>
-            <span>160</span>
+            <span>{selectedBook.pagesNumber}</span>
           </PageCountInfoBox>
         </PageCountBox>
       </BookCategoryAndPageContainer>

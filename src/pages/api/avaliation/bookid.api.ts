@@ -7,11 +7,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  const bookId = String(req.query.bookId)
+
   if (req.method !== 'GET') {
     return res.status(405).end()
   }
-
-  const bookId = String(req.query.bookId)
 
   if (bookId === 'undefined') {
     return res
@@ -19,27 +19,23 @@ export default async function handler(
       .json({ Message: 'A book id has not been established' })
   }
 
-  const book = await prisma.book.findUnique({
+  const avaliations = await prisma.avaliation.findMany({
     where: {
-      id: bookId,
+      bookId,
     },
     include: {
-      avaliations: {
+      User: {
         select: {
-          ratingNumber: true,
-          User: {
-            select: {
-              id: true,
-            },
-          },
+          name: true,
+          image: true,
         },
       },
     },
   })
 
-  if (!book) {
+  if (!avaliations) {
     return res.status(401).json({ Message: 'BookID not found' })
   } else {
-    return res.json({ book })
+    return res.json({ avaliations })
   }
 }

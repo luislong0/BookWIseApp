@@ -2,10 +2,13 @@ import { AvatarWithGradient } from '@/src/components/AvatarWithGradient'
 import { StarRating } from '@/src/components/StarRating'
 import { Container, Header, UserBox, UserInfoBox } from './styles'
 
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+
 interface SimpleRatingCommentsProps {
   imgUrl: string
   name: string
-  createdAt?: Date
+  createdAt: string
   comment: string
   commentRate: number
 }
@@ -15,6 +18,7 @@ export function SimpleRatingComments({
   imgUrl,
   comment,
   commentRate,
+  createdAt,
 }: SimpleRatingCommentsProps) {
   return (
     <Container>
@@ -28,7 +32,12 @@ export function SimpleRatingComments({
           />
           <UserInfoBox>
             <span>{name}</span>
-            <span>Há 2 dias</span>
+            <span>
+              {formatDistanceToNow(new Date(createdAt), {
+                addSuffix: true,
+                locale: ptBR,
+              })}
+            </span>
           </UserInfoBox>
         </UserBox>
         <StarRating ratingNumber={commentRate} />

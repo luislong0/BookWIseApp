@@ -16,6 +16,7 @@ import { useContext, useEffect, useState } from 'react'
 import { CommentForm } from './components/CommentForm'
 import { api } from '@/src/lib/axios'
 import { BookContext } from '@/src/contexts/BookContext'
+import { useSession } from 'next-auth/react'
 
 interface SelectedButtonModalProps {
   isLoggedIn: boolean
@@ -28,6 +29,7 @@ interface BookAvaliationsProps {
   bookId: string
   comment: string
   ratingNumber: number
+  created_at: string
   User: {
     name: string
     image: string
@@ -45,6 +47,8 @@ export function SelectedButtonModal({
   const [bookAvaliations, setBookAvaliations] = useState<
     BookAvaliationsProps[]
   >([] as BookAvaliationsProps[])
+
+  const session = useSession()
 
   const { updateCommentsToggle } = useContext(BookContext)
 
@@ -79,7 +83,7 @@ export function SelectedButtonModal({
           <RatingsContent>
             <RatingsContentHeader>
               <span>Avaliações</span>
-              {isLoggedIn === true && makeAComment === false ? (
+              {session.data !== null && makeAComment === false ? (
                 <button
                   className={nunito.className}
                   onClick={ToggleHideCommentForm}
@@ -90,7 +94,7 @@ export function SelectedButtonModal({
                 <></>
               )}
 
-              {isLoggedIn === false && makeAComment === false && (
+              {session.data === null && makeAComment === false && (
                 <LoginToRateModal />
               )}
             </RatingsContentHeader>
@@ -109,12 +113,13 @@ export function SelectedButtonModal({
                     imgUrl={bookAvaliation.User.image}
                     comment={bookAvaliation.comment}
                     commentRate={bookAvaliation.ratingNumber}
+                    createdAt={bookAvaliation.created_at}
                   />
-                )
+                );
               })}
           </RatingsContent>
         </RatingsContainer>
       </Content>
     </Dialog.Portal>
-  )
+  );
 }

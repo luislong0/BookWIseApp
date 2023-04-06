@@ -8,37 +8,53 @@ import {
   UserCommentBoxContainer,
 } from './styles'
 
-export function UserCommentBox() {
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+
+interface UserCommentBoxContainerProps {
+  bookImage: string
+  bookTitle: string
+  bookAuthor: string
+  rating: number
+  comment: string
+  createdAt: Date
+}
+
+export function UserCommentBox({
+  bookAuthor,
+  bookImage,
+  bookTitle,
+  comment,
+  rating,
+  createdAt,
+}: UserCommentBoxContainerProps) {
+  function capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  const commentCreatedDate = capitalizeFirstLetter(
+    formatDistanceToNow(new Date(createdAt), {
+      addSuffix: true,
+      locale: ptBR,
+    }),
+  )
+
   return (
     <UserCommentBoxContainer>
-      <span>Há 2 dias</span>
+      <span>{commentCreatedDate}</span>
       <Box>
         <BookHeader>
-          <Image
-            src={'/o-hobbit.png'}
-            alt="book image"
-            width={110}
-            height={160}
-          />
+          <Image src={bookImage} alt="book image" width={110} height={160} />
           <TitleContainer>
             <TitleBox>
-              <span>Entendendo Algoritmos</span>
-              <span>Aditya Bhargava</span>
+              <span>{bookTitle}</span>
+              <span>{bookAuthor}</span>
             </TitleBox>
 
-            <StarRating ratingNumber={4} />
+            <StarRating ratingNumber={rating} />
           </TitleContainer>
         </BookHeader>
-        <p>
-          Tristique massa sed enim lacinia odio. Congue ut faucibus nunc vitae
-          non. Nam feugiat vel morbi viverra vitae mi. Vitae fringilla ut et
-          suspendisse enim suspendisse vitae. Leo non eget lacus sollicitudin
-          tristique pretium quam. Mollis et luctus amet sed convallis varius
-          massa sagittis. Proin sed proin at leo quis ac sem. Nam donec accumsan
-          curabitur amet tortor quam sit. Bibendum enim sit dui lorem urna amet
-          elit rhoncus ut. Aliquet euismod vitae ut turpis. Aliquam amet integer
-          pellentesque.
-        </p>
+        <p>{comment}</p>
       </Box>
     </UserCommentBoxContainer>
   )

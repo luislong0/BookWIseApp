@@ -20,6 +20,7 @@ import {
 } from './styles'
 import { SelectedButtonModal } from '@/src/components/SelectedButtonModal'
 import { BookContext } from '@/src/contexts/BookContext'
+import { UserContext } from '@/src/contexts/UserContext'
 
 const bookTypes = [
   'Tudo',
@@ -34,6 +35,7 @@ const bookTypes = [
 
 export default function Explore() {
   const { books, getAllBooks, getBookByCategory } = useContext(BookContext)
+  const { loggedUser } = useContext(UserContext)
 
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [selectedType, setSelectedType] = useState('Tudo')
@@ -95,6 +97,12 @@ export default function Explore() {
                 letterLimit: 27,
               })
 
+              const readBookUserId = book.avaliations.map((bookAvaliation) => {
+                if (bookAvaliation.User.id === loggedUser.id) {
+                  return loggedUser.id
+                } else return null
+              })
+
               if (book.avaliations.length !== 0) {
                 const sumWithInitial = book.avaliations.reduce(
                   (accumulator: any, currentValue: any) =>
@@ -105,22 +113,42 @@ export default function Explore() {
                   sumWithInitial / book.avaliations.length,
                 )
 
-                return (
-                  <Dialog.Root key={i}>
-                    <Trigger>
-                      <BookCard
-                        bookAuthor={book.author}
-                        bookTitle={validateText.text}
-                        bookRating={ratingMedia}
-                        bookImg={book.imageUrl}
+                if (readBookUserId !== null) {
+                  return (
+                    <Dialog.Root key={i}>
+                      <Trigger>
+                        <BookCard
+                          bookAuthor={book.author}
+                          bookTitle={validateText.text}
+                          bookRating={ratingMedia}
+                          bookImg={book.imageUrl}
+                          userBookReadingId={readBookUserId[0]}
+                        />
+                      </Trigger>
+                      <SelectedButtonModal
+                        isLoggedIn={isLoggedIn}
+                        bookId={book.id}
                       />
-                    </Trigger>
-                    <SelectedButtonModal
-                      isLoggedIn={isLoggedIn}
-                      bookId={book.id}
-                    />
-                  </Dialog.Root>
-                )
+                    </Dialog.Root>
+                  )
+                } else {
+                  return (
+                    <Dialog.Root key={i}>
+                      <Trigger>
+                        <BookCard
+                          bookAuthor={book.author}
+                          bookTitle={validateText.text}
+                          bookRating={ratingMedia}
+                          bookImg={book.imageUrl}
+                        />
+                      </Trigger>
+                      <SelectedButtonModal
+                        isLoggedIn={isLoggedIn}
+                        bookId={book.id}
+                      />
+                    </Dialog.Root>
+                  )
+                }
               } else {
                 return (
                   <Dialog.Root key={i}>

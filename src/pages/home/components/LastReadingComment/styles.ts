@@ -11,11 +11,15 @@ export const LastReadingCommentBox = styled('div', {
 
   backgroundColor: '$gray600',
   borderRadius: '$md',
+
+  img: {
+    borderRadius: '$sm',
+  },
 })
 export const InfoBox = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
+  width: '100%',
 
   p: {
     fontSize: '$sm',
@@ -36,6 +40,7 @@ export const LastReadingCommentHeader = styled('div', {
 export const InfoTitleBox = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+  margin: '$3 0 $6 0',
 
   span: {
     '&:first-child': {

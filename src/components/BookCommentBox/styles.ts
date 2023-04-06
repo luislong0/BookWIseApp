@@ -44,8 +44,11 @@ export const UserDescription = styled('div', {
 export const BookComment = styled('div', {
   display: 'flex',
   gap: '$5',
+  width: '100%',
 
-  alignItems: 'flex-start',
+  img: {
+    borderRadius: '$sm',
+  },
 })
 
 export const BookInfoBox = styled('div', {

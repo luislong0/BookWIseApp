@@ -6,16 +6,28 @@ import {
   TrendingBookInfo,
 } from './styles'
 
-export function TrendingBookCard() {
+interface TrendingBookCardProps {
+  bookTitle: string
+  bookAuthor: string
+  bookAvaliation: number
+  bookImage: string
+}
+
+export function TrendingBookCard({
+  bookAuthor,
+  bookAvaliation,
+  bookImage,
+  bookTitle,
+}: TrendingBookCardProps) {
   return (
     <TrendingBookCardContainer>
-      <Image src={'/o-hobbit.png'} alt="book image" width={64} height={95} />
+      <Image src={bookImage} alt="book image" width={64} height={95} />
       <TrendingBookInfo>
         <TitleContainer>
-          <span>A revolução dos bichos</span>
-          <span>George Orwell</span>
+          <span>{bookTitle}</span>
+          <span>{bookAuthor}</span>
         </TitleContainer>
-        <StarRating ratingNumber={3} />
+        <StarRating ratingNumber={bookAvaliation} />
       </TrendingBookInfo>
     </TrendingBookCardContainer>
   )

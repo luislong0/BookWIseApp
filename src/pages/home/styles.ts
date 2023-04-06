@@ -102,6 +102,10 @@ export const TrendingBooksContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: '$3',
+
+  img: {
+    borderRadius: '$sm',
+  },
 })
 
 export const TrendingBooksTitle = styled('div', {

@@ -1,7 +1,8 @@
 import { Input } from '@/src/components/Input'
 import { Sidebar } from '@/src/components/Sidebar'
+import { UserContext } from '@/src/contexts/UserContext'
 import { UserCircle } from 'phosphor-react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { UserCard } from './components/UserCard'
 import { UserCommentBox } from './components/UserCommentBox'
 import {
@@ -17,6 +18,7 @@ import {
 
 export default function User() {
   const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const { loggedUserAvaliations } = useContext(UserContext)
 
   return (
     <>
@@ -38,10 +40,19 @@ export default function User() {
                 </BookFormContainer>
 
                 <BookBox>
-                  <UserCommentBox />
-                  <UserCommentBox />
-                  <UserCommentBox />
-                  <UserCommentBox />
+                  {loggedUserAvaliations.map((avaliation) => {
+                    return (
+                      <UserCommentBox
+                        key={avaliation.avaliation.id}
+                        bookAuthor={avaliation.avaliation.Book.author}
+                        bookImage={avaliation.avaliation.Book.imageUrl}
+                        bookTitle={avaliation.avaliation.Book.title}
+                        comment={avaliation.avaliation.comment}
+                        createdAt={new Date(avaliation.avaliation.created_at)}
+                        rating={avaliation.avaliation.ratingNumber}
+                      />
+                    )
+                  })}
                 </BookBox>
               </MyBooksContainer>
               <UserInfoContainer>

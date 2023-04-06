@@ -1,5 +1,7 @@
 import { StarRating } from '@/src/components/StarRating'
+import { UserContext } from '@/src/contexts/UserContext'
 import Image from 'next/image'
+import { useContext } from 'react'
 import {
   BookCardContainer,
   BookInfoContainer,
@@ -12,6 +14,7 @@ interface BookCardProps {
   bookTitle: string
   bookAuthor: string
   bookRating: number
+  userBookReadingId?: any
 }
 
 export function BookCard({
@@ -19,13 +22,15 @@ export function BookCard({
   bookAuthor,
   bookRating,
   bookImg,
+  userBookReadingId,
 }: BookCardProps) {
-  const isReading = true
+  const { loggedUser } = useContext(UserContext)
 
   return (
     <BookCardContainer
       onClick={() => {
-        console.log('oi')
+        console.log(userBookReadingId)
+        console.log(typeof userBookReadingId)
       }}
     >
       <Image src={bookImg} alt="book image" width={108} height={152} />
@@ -35,7 +40,7 @@ export function BookCard({
           <span>{bookAuthor}</span>
         </TitleBox>
         <StarRating ratingNumber={bookRating} />
-        {isReading === true ? (
+        {userBookReadingId === loggedUser.id ? (
           <ReadingTag>
             <span>LIDO</span>
           </ReadingTag>

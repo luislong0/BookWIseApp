@@ -1,4 +1,6 @@
 import { getLimitedText } from '@/src/utils/getLimitedText'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 import Image from 'next/image'
 import { useState } from 'react'
 import { AvatarWithGradient } from '../AvatarWithGradient'
@@ -14,15 +16,35 @@ import {
   UserInfoBox,
 } from './styles'
 
+interface BookCommentBoxProps {
+  userPhoto: string
+  userName: string
+  createdAt: Date
+  ratingNumber: number
+  bookImage: string
+  bookTitle: string
+  bookAuthor: string
+  bookComment: string
+}
+
 interface CommentProps {
   text: string
   type: 'limited' | 'full'
   hideText: boolean
 }
 
-export function BookCommentBox() {
+export function BookCommentBox({
+  bookAuthor,
+  bookComment,
+  bookImage,
+  bookTitle,
+  createdAt,
+  ratingNumber,
+  userName,
+  userPhoto,
+}: BookCommentBoxProps) {
   const textObject = getLimitedText({
-    text: 'Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh',
+    text: bookComment,
     letterLimit: 220,
   })
 
@@ -35,13 +57,13 @@ export function BookCommentBox() {
       setComment({
         type: 'full',
         hideText: false,
-        text: 'Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh',
+        text: bookComment,
       })
     } else {
       setComment({
         type: 'limited',
         hideText: true,
-        text: textObject.text,
+        text: textObject!.text,
       })
     }
   }
@@ -50,37 +72,53 @@ export function BookCommentBox() {
     <Container>
       <Header>
         <UserInfoBox>
-          <AvatarWithGradient imgWidth={45} imgHeight={45} imgSize="md" />
+          <AvatarWithGradient
+            imgWidth={45}
+            imgHeight={45}
+            imgSize="md"
+            url={userPhoto}
+          />
           <UserDescription>
-            <span>Luis Otavio</span>
-            <span>Hoje</span>
+            <span>{userName}</span>
+            <span>
+              <span>
+                {formatDistanceToNow(new Date(createdAt), {
+                  addSuffix: true,
+                  locale: ptBR,
+                })}
+              </span>
+            </span>
           </UserDescription>
         </UserInfoBox>
-        <StarRating ratingNumber={3} />
+        <StarRating ratingNumber={ratingNumber} />
       </Header>
       <BookComment>
-        <Image
-          src={'/o-hobbit.png'}
-          alt="book image"
-          width={110}
-          height={160}
-        />
+        <Image src={bookImage} alt="book image" width={110} height={160} />
         <BookInfoBox>
           <BookTitleBox>
-            <span>O Hobbit</span>
-            <span>J.R.R. Tolkien</span>
+            <span>{bookTitle}</span>
+            <span>{bookAuthor}</span>
           </BookTitleBox>
           <TextBox>
             <p>
               {comment.text}{' '}
-              {comment.type === 'limited' && comment.hideText === true ? (
+              {comment.type === 'limited' &&
+              comment.hideText === true &&
+              comment.text.length > 220 ? (
                 <button onClick={() => toggleHideMessage('full')}>
                   ver mais
                 </button>
               ) : (
+                <></>
+              )}
+              {comment.type === 'full' &&
+              comment.hideText === false &&
+              comment.text.length > 220 ? (
                 <button onClick={() => toggleHideMessage('hide')}>
                   ver menos
                 </button>
+              ) : (
+                <></>
               )}
             </p>
           </TextBox>

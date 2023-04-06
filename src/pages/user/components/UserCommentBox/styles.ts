@@ -29,6 +29,10 @@ export const Box = styled('div', {
 export const BookHeader = styled('div', {
   display: 'flex',
   gap: '$6',
+
+  img: {
+    borderRadius: '$sm',
+  },
 })
 
 export const TitleContainer = styled('div', {

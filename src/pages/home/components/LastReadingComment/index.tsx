@@ -7,23 +7,54 @@ import {
   LastReadingCommentHeader,
 } from './styles'
 
-export function LastReadingComment() {
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import { useState } from 'react'
+import { getLimitedText } from '@/src/utils/getLimitedText'
+
+interface LastReadingCommentProps {
+  bookImage: string
+  bookTitle: string
+  bookAuthor: string
+  bookComment: string
+  bookRating: number
+  createdAt: Date
+}
+
+export function LastReadingComment({
+  bookAuthor,
+  bookComment,
+  bookImage,
+  bookRating,
+  bookTitle,
+  createdAt,
+}: LastReadingCommentProps) {
+  const formattedComment = getLimitedText({
+    text: bookComment,
+    letterLimit: 195,
+  })
+
   return (
     <LastReadingCommentBox>
-      <Image src={'/o-hobbit.png'} alt="book image" width={110} height={160} />
+      <Image src={bookImage} alt="book image" width={110} height={160} />
       <InfoBox>
         <LastReadingCommentHeader>
-          <span>Há 2 dias</span>
-          <StarRating ratingNumber={4} />
+          {createdAt !== undefined && (
+            <span>
+              {formatDistanceToNow(new Date(createdAt), {
+                addSuffix: true,
+                locale: ptBR,
+              })}
+            </span>
+          )}
+
+          <StarRating ratingNumber={bookRating} />
         </LastReadingCommentHeader>
         <InfoTitleBox>
-          <span>Entendendo Algoritmos</span>
-          <span>Aditya Bhargava</span>
+          <span>{bookTitle}</span>
+          <span>{bookAuthor}</span>
         </InfoTitleBox>
-        <p>
-          Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis.
-          Penatibus id vestibulum imperdiet a at imperdiet lectu...
-        </p>
+        <p>{formattedComment?.text}</p>
       </InfoBox>
     </LastReadingCommentBox>
   )

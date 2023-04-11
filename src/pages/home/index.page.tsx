@@ -151,7 +151,7 @@ export default function Home() {
                 </HeaderLink>
               </TrendingBooksTitle>
 
-              {topThreeBooks.map((book, i) => {
+              {topThreeBooks!.map((book, i) => {
                 return (
                   <TrendingBookCard
                     key={book.title}

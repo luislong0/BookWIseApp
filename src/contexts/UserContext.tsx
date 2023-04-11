@@ -58,6 +58,7 @@ interface UserContextType {
   loggedUserAvaliations: LoggedUserAvaliationsProps[]
   loggedUserBookInfo: UserAvaliationBooksInfoProps
   getLoggedUserInfo: (userName: string) => Promise<void>
+  handleSearchUserAvaliation: (query: string) => Promise<void>
 }
 
 interface UserContextProviderProps {
@@ -120,6 +121,17 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     setLoggedUserAvaliations(response.data.userAvaliations)
   }
 
+  async function handleSearchUserAvaliation(query: string) {
+    console.log('QUERY: ' + query)
+    const response = await api.get(
+      `/avaliation/bookname?userName=${loggedUser.id}&query=${query}`,
+      {},
+    )
+
+    console.log(response.data.searchBooks)
+    setLoggedUserAvaliations(response.data.searchBooks)
+  }
+
   useEffect(() => {
     if (session.data?.user) {
       getLoggedUserInfo(session.data?.user!.name!)
@@ -135,6 +147,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         getLoggedUserInfo,
         loggedUserBookInfo,
         loggedUserAvaliations,
+        handleSearchUserAvaliation,
       }}
     >
       {children}

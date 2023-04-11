@@ -2,12 +2,17 @@
 
 import { prisma } from '@/src/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { z } from 'zod'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const userName = String(req.query.userName)
+  const userBooksAvaliationSchema = z.object({
+    userName: z.string(),
+  })
+
+  const { userName } = userBooksAvaliationSchema.parse(req.query)
 
   if (req.method !== 'GET') {
     return res.status(405).end()

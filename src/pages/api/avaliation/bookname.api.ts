@@ -57,16 +57,20 @@ export default async function handler(
       },
     })
 
-    const searchBooks = book[0].avaliations.map((avaliation) => {
-      return {
-        avaliation,
-      }
-    })
-
-    if (!searchBooks) {
-      return res.status(401).json({ Message: 'userName not found' })
+    if (book[0] === undefined) {
+      return res.status(401).json({ Message: 'Book or Author not found' })
     } else {
-      return res.json({ searchBooks })
+      const searchBooks = book[0].avaliations.map((avaliation) => {
+        return {
+          avaliation,
+        }
+      })
+
+      if (!searchBooks) {
+        return res.status(401).json({ Message: 'userName not found' })
+      } else {
+        return res.json({ searchBooks })
+      }
     }
   }
 }

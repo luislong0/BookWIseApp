@@ -11,7 +11,7 @@ import { SelectedButtonCard } from './components/SelectedBookCard'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Nunito } from '@next/font/google'
 import { SimpleRatingComments } from './components/SimpleRatingComments'
-import { LoginToRateModal } from '../LoginToRateModal'
+import { LoginModal } from '../LoginModal'
 import { useContext, useEffect, useState } from 'react'
 import { CommentForm } from './components/CommentForm'
 import { api } from '@/src/lib/axios'
@@ -95,7 +95,7 @@ export function SelectedButtonModal({
               )}
 
               {session.data === null && makeAComment === false && (
-                <LoginToRateModal />
+                <LoginModal component="ratingModal" />
               )}
             </RatingsContentHeader>
             {makeAComment === true && (
@@ -115,11 +115,11 @@ export function SelectedButtonModal({
                     commentRate={bookAvaliation.ratingNumber}
                     createdAt={bookAvaliation.created_at}
                   />
-                );
+                )
               })}
           </RatingsContent>
         </RatingsContainer>
       </Content>
     </Dialog.Portal>
-  );
+  )
 }

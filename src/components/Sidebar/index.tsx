@@ -10,8 +10,9 @@ import wiseAppLogo from '../../assets/book-heart.svg'
 import { ListElement } from './components/ListElement'
 import { AvatarWithGradient } from '../AvatarWithGradient'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import { getLimitedText } from '@/src/utils/getLimitedText'
+import { LoginModal } from '../LoginModal'
 
 interface SidebarProps {
   page: string
@@ -95,16 +96,13 @@ export function Sidebar({ page, isLoggedIn }: SidebarProps) {
               imgHeight={30}
               imgSize="sm"
             />
-            <Link href={'/user'}>{username.text!}</Link>
+            <Link href={'/user'}>{username!.text!}</Link>
             <button>
-              <SignOut size={20} weight="bold" />
+              <SignOut size={20} weight="bold" onClick={() => signOut()} />
             </button>
           </UserInfoButtonBox>
         ) : (
-          <button>
-            Fazer login
-            <SignIn size={20} weight="bold" />
-          </button>
+          <LoginModal component="login" />
         )}
 
         {/* <button>

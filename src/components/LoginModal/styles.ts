@@ -67,6 +67,33 @@ export const Trigger = styled(Dialog.Trigger, {
   },
 })
 
+export const SidebarLoginTrigger = styled(Dialog.Trigger, {
+  button: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '$3',
+    backgroundColor: 'transparent',
+    border: 'none',
+
+    color: '$gray300',
+    fontSize: '$md',
+    fontWeight: 'bold',
+
+    fontFamily: '$default',
+    transition: 'all 0.3s ease-in',
+    cursor: 'pointer',
+
+    '&:hover': {
+      color: '$gray100',
+    },
+
+    svg: {
+      color: '$green100',
+    },
+  },
+})
+
 export const LoginButtonsContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',

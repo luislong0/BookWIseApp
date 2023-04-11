@@ -15,10 +15,21 @@ import {
   SidebarSession,
   UserInfoContainer,
 } from './styles'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export default function User() {
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const { loggedUserAvaliations } = useContext(UserContext)
+
+  const session = useSession()
+  const router = useRouter()
+
+  if (!session.data?.user) {
+    if (typeof window !== 'undefined') {
+      router.push('/home')
+    }
+  }
 
   return (
     <>

@@ -8,6 +8,7 @@ import {
   ReadingTag,
   TitleBox,
 } from './styles'
+import { useSession } from 'next-auth/react'
 
 interface BookCardProps {
   bookImg?: any
@@ -25,12 +26,13 @@ export function BookCard({
   userBookReadingId,
 }: BookCardProps) {
   const { loggedUser } = useContext(UserContext)
+  const session = useSession()
 
   return (
     <BookCardContainer
       onClick={() => {
-        console.log(userBookReadingId)
-        console.log(typeof userBookReadingId)
+        console.log(userBookReadingId);
+        console.log(typeof userBookReadingId);
       }}
     >
       <Image src={bookImg} alt="book image" width={108} height={152} />
@@ -40,7 +42,7 @@ export function BookCard({
           <span>{bookAuthor}</span>
         </TitleBox>
         <StarRating ratingNumber={bookRating} />
-        {userBookReadingId === loggedUser.id ? (
+        {userBookReadingId === loggedUser.id && session.data?.user ? (
           <ReadingTag>
             <span>LIDO</span>
           </ReadingTag>
@@ -49,5 +51,5 @@ export function BookCard({
         )}
       </BookInfoContainer>
     </BookCardContainer>
-  )
+  );
 }

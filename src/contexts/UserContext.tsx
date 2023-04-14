@@ -53,9 +53,24 @@ interface LoggedUserAvaliationsProps {
   }
 }
 
+interface SelectUserAvaliationsProps {
+  id: string
+  userId: string
+  bookId: string
+  comment: string
+  ratingNumber: number
+  created_at: string
+  Book: {
+    title: string
+    author: string
+    imageUrl: string
+  }
+}
+
 interface UserContextType {
   loggedUser: LoggedUserProps
   loggedUserAvaliations: LoggedUserAvaliationsProps[]
+  selectUserAvaliations: SelectUserAvaliationsProps[]
   loggedUserBookInfo: UserAvaliationBooksInfoProps
   getLoggedUserInfo: (userName: string) => Promise<void>
   handleSearchUserAvaliation: (query: string) => Promise<void>
@@ -73,6 +88,9 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     useState<UserAvaliationBooksInfoProps>({} as UserAvaliationBooksInfoProps)
   const [loggedUserAvaliations, setLoggedUserAvaliations] = useState<
     LoggedUserAvaliationsProps[]
+  >([])
+  const [selectUserAvaliations, setSelectUserAvaliations] = useState<
+    SelectUserAvaliationsProps[]
   >([])
 
   const session = useSession()
@@ -128,8 +146,8 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       {},
     )
 
-    console.log(response.data.searchBooks)
-    setLoggedUserAvaliations(response.data.searchBooks)
+    console.log(response.data.book)
+    setSelectUserAvaliations(response.data.book)
   }
 
   useEffect(() => {
@@ -148,6 +166,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         loggedUserBookInfo,
         loggedUserAvaliations,
         handleSearchUserAvaliation,
+        selectUserAvaliations,
       }}
     >
       {children}

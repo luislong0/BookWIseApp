@@ -26,51 +26,47 @@ export default async function handler(
   }
 
   if (userName !== 'undefined' && query !== 'undefined') {
-    const book = await prisma.book.findMany({
+    const book = await prisma.avaliation.findMany({
       where: {
-        OR: [
+        AND: [
           {
-            title: {
-              contains: query,
-            },
+            userId: userName,
           },
           {
-            author: {
-              contains: query,
-            },
+            OR: [
+              {
+                Book: {
+                  author: {
+                    contains: query,
+                  },
+                },
+              },
+              {
+                Book: {
+                  title: {
+                    contains: query,
+                  },
+                },
+              },
+            ],
           },
         ],
       },
       include: {
-        avaliations: {
-          where: { userId: userName },
-          include: {
-            Book: {
-              select: {
-                title: true,
-                author: true,
-                imageUrl: true,
-              },
-            },
+        Book: {
+          select: {
+            title: true,
+            author: true,
+            imageUrl: true,
           },
         },
       },
     })
 
-    if (book[0] === undefined) {
-      return res.status(401).json({ Message: 'Book or Author not found' })
+    if (!book) {
+      return res.status(401).json({ Message: 'userName not found' })
     } else {
-      const searchBooks = book[0].avaliations.map((avaliation) => {
-        return {
-          avaliation,
-        }
-      })
-
-      if (!searchBooks) {
-        return res.status(401).json({ Message: 'userName not found' })
-      } else {
-        return res.json({ searchBooks })
-      }
+      return res.json({ book })
     }
   }
 }

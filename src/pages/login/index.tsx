@@ -62,7 +62,6 @@ export default function Login() {
                 colorVariant="purple"
                 loginType="visitant"
               />
-              {JSON.stringify(session.data)}
             </ButtonsContainer>
           </LoginBox>
         </LoginContainer>

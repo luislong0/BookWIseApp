@@ -19,13 +19,15 @@ export default async function handler(
     return res.status(405).end()
   }
 
+  await prisma.$executeRaw`SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));`
+
   const topBooks: TopBooksProps[] = await prisma.$queryRaw`
     SELECT b.title, b.author, b.imageUrl, COUNT(a.id) AS numAvaliacoes, SUM(a.ratingNumber) AS sumAvaliacoes
     FROM Book b
     LEFT JOIN Avaliation a ON b.id = a.bookId
     GROUP BY b.title
     ORDER BY numAvaliacoes DESC
-    LIMIT 3
+    LIMIT 3;
   `
 
   const topBooksParsed: any = topBooks.map((book) => {

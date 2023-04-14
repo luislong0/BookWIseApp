@@ -11,6 +11,8 @@ import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { ButtonsBox, CommentFormBox, Form, Header, UserInfoBox } from './styles'
+import { successNotification } from '@/src/components/Notifiers/Success'
+import { errorNotification } from '@/src/components/Notifiers/Error'
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -54,10 +56,11 @@ export function CommentForm({
         comment: data.comment,
         ratingNumber: bookCommentRating,
       })
-
       handleUpdateComments()
+      successNotification('Livro avaliado com sucesso!!')
     } catch (err) {
       console.error(err)
+      errorNotification(String(err))
     }
   }
 

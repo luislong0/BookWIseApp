@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { BookContext } from '@/src/contexts/BookContext'
 import { UserContext } from '@/src/contexts/UserContext'
 import { api } from '@/src/lib/axios'
+import { errorNotification } from '../Notifiers/Error'
 
 const searchFormSchema = z.object({
   searchData: z.string(),
@@ -46,7 +47,12 @@ export function Input({ inputPage }: InputProps) {
     } else {
       console.log('in user')
       console.log(data.searchData)
-      handleSearchUserAvaliation(data.searchData)
+      try {
+        handleSearchUserAvaliation(data.searchData)
+      } catch (error) {
+        errorNotification(String(error))
+      }
+
       reset()
     }
   }

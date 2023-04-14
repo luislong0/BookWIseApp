@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
 import { getLimitedText } from '@/src/utils/getLimitedText'
 import { LoginModal } from '../LoginModal'
+import { successNotification } from '../Notifiers/Success'
 
 interface SidebarProps {
   page: string
@@ -25,6 +26,15 @@ export function Sidebar({ page, isLoggedIn }: SidebarProps) {
     text: session.data?.user!.name ?? '',
     letterLimit: 12,
   })
+
+  async function handleLogout() {
+    try {
+      signOut()
+      successNotification('Usuário deslogado com sucesso!!')
+    } catch (error) {
+      alert(error)
+    }
+  }
 
   return (
     <SidebarContainer>
@@ -98,7 +108,7 @@ export function Sidebar({ page, isLoggedIn }: SidebarProps) {
             />
             <Link href={'/user'}>{username!.text!}</Link>
             <button>
-              <SignOut size={20} weight="bold" onClick={() => signOut()} />
+              <SignOut size={20} weight="bold" onClick={handleLogout} />
             </button>
           </UserInfoButtonBox>
         ) : (

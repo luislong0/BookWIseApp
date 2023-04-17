@@ -18,6 +18,7 @@ import { RocketLaunch } from 'phosphor-react'
 import { useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 export default function Login() {
   const session = useSession()
@@ -31,6 +32,11 @@ export default function Login() {
 
   return (
     <>
+      <NextSeo
+        title="Login | Book Wise "
+        description="Visualize e faça avaliações sobre seus livros preferidos!!"
+      />
+
       <Container>
         <BannerContainer>
           <Image src={loginBanner} alt="BookWise Login Banner" />

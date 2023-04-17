@@ -25,7 +25,7 @@ export default async function handler(
     SELECT b.title, b.author, b.imageUrl, COUNT(a.id) AS numAvaliacoes, SUM(a.ratingNumber) AS sumAvaliacoes
     FROM Book b
     LEFT JOIN Avaliation a ON b.id = a.bookId
-    GROUP BY b.title
+    GROUP BY b.title, b.author, b.imageUrl
     ORDER BY numAvaliacoes DESC
     LIMIT 3;
   `

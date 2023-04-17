@@ -17,6 +17,7 @@ import {
 } from './styles'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 export default function User() {
   const [isLoggedIn, setIsLoggedIn] = useState(true)
@@ -36,62 +37,64 @@ export default function User() {
 
   return (
     <>
-      <>
-        <Container>
-          <SidebarSession>
-            <Sidebar page={'user'} isLoggedIn={isLoggedIn} />
-          </SidebarSession>
+      <NextSeo
+        title={`${session.data?.user?.name} | Book Wise`}
+        description="Visualize e faça avaliações sobre seus livros preferidos!!"
+        noindex
+      />
 
-          <div>
-            <HomeTitle>
-              <UserCircle size={36} />
-              Perfil
-            </HomeTitle>
-            <ContentContainer>
-              <MyBooksContainer>
-                <BookFormContainer>
-                  <Input inputPage="user" />
-                </BookFormContainer>
+      <Container>
+        <SidebarSession>
+          <Sidebar page={'user'} isLoggedIn={isLoggedIn} />
+        </SidebarSession>
 
-                <BookBox>
-                  {selectUserAvaliations.length === 0
-                    ? loggedUserAvaliations.map((avaliation) => {
-                        return (
-                          <UserCommentBox
-                            key={avaliation.avaliation.id}
-                            bookAuthor={avaliation.avaliation.Book.author}
-                            bookImage={avaliation.avaliation.Book.imageUrl}
-                            bookTitle={avaliation.avaliation.Book.title}
-                            comment={avaliation.avaliation.comment}
-                            createdAt={
-                              new Date(avaliation.avaliation.created_at)
-                            }
-                            rating={avaliation.avaliation.ratingNumber}
-                          />
-                        )
-                      })
-                    : selectUserAvaliations.map((avaliation) => {
-                        return (
-                          <UserCommentBox
-                            key={avaliation.id}
-                            bookAuthor={avaliation.Book.author}
-                            bookImage={avaliation.Book.imageUrl}
-                            bookTitle={avaliation.Book.title}
-                            comment={avaliation.comment}
-                            createdAt={new Date(avaliation.created_at)}
-                            rating={avaliation.ratingNumber}
-                          />
-                        )
-                      })}
-                </BookBox>
-              </MyBooksContainer>
-              <UserInfoContainer>
-                <UserCard />
-              </UserInfoContainer>
-            </ContentContainer>
-          </div>
-        </Container>
-      </>
+        <div>
+          <HomeTitle>
+            <UserCircle size={36} />
+            Perfil
+          </HomeTitle>
+          <ContentContainer>
+            <MyBooksContainer>
+              <BookFormContainer>
+                <Input inputPage="user" />
+              </BookFormContainer>
+
+              <BookBox>
+                {selectUserAvaliations.length === 0
+                  ? loggedUserAvaliations.map((avaliation) => {
+                      return (
+                        <UserCommentBox
+                          key={avaliation.avaliation.id}
+                          bookAuthor={avaliation.avaliation.Book.author}
+                          bookImage={avaliation.avaliation.Book.imageUrl}
+                          bookTitle={avaliation.avaliation.Book.title}
+                          comment={avaliation.avaliation.comment}
+                          createdAt={new Date(avaliation.avaliation.created_at)}
+                          rating={avaliation.avaliation.ratingNumber}
+                        />
+                      )
+                    })
+                  : selectUserAvaliations.map((avaliation) => {
+                      return (
+                        <UserCommentBox
+                          key={avaliation.id}
+                          bookAuthor={avaliation.Book.author}
+                          bookImage={avaliation.Book.imageUrl}
+                          bookTitle={avaliation.Book.title}
+                          comment={avaliation.comment}
+                          createdAt={new Date(avaliation.created_at)}
+                          rating={avaliation.ratingNumber}
+                        />
+                      )
+                    })}
+              </BookBox>
+            </MyBooksContainer>
+            <UserInfoContainer>
+              <UserCard />
+            </UserInfoContainer>
+          </ContentContainer>
+        </div>
+      </Container>
     </>
   )
 }

@@ -20,6 +20,7 @@ import {
   TrendingBooksContainer,
   TrendingBooksTitle,
 } from './styles'
+import { NextSeo } from 'next-seo'
 
 interface AvaliationCommentsProps {
   id: string
@@ -91,6 +92,11 @@ export default function Home() {
 
   return (
     <>
+      <NextSeo
+        title="Home | Book Wise"
+        description="Visualize e faça avaliações sobre seus livros preferidos!!"
+      />
+
       <Container>
         <SidebarSession>
           <Sidebar page={'home'} isLoggedIn={isLoggedIn} />

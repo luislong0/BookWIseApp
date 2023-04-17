@@ -3,13 +3,13 @@
 import { prisma } from '@/src/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-interface AggregateResult {
-  _count: {
-    book: {
-      author: number
-    }
-  }[]
-}
+// interface AggregateResult {
+//   _count: {
+//     book: {
+//       author: number
+//     }
+//   }[]
+// }
 
 export default async function handler(
   req: NextApiRequest,

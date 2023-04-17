@@ -47,6 +47,9 @@ export default async function handler(
         },
       },
     },
+    orderBy: {
+      title: 'asc',
+    },
   })
 
   return res.json({ book })

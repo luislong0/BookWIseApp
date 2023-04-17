@@ -6,6 +6,7 @@ import { SessionProvider } from 'next-auth/react'
 import { UserContextProvider } from '../contexts/UserContext'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
+import { DefaultSeo } from 'next-seo'
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -37,6 +38,14 @@ export default function App({
         draggable
         pauseOnHover
         theme="dark"
+      />
+      <DefaultSeo
+        openGraph={{
+          type: 'website',
+          locale: 'pt_BR',
+          url: 'https://book-wise.com.br',
+          siteName: 'Book Wise',
+        }}
       />
     </SessionProvider>
   )

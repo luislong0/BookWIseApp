@@ -21,6 +21,7 @@ import {
 import { SelectedButtonModal } from '@/src/components/SelectedButtonModal'
 import { BookContext } from '@/src/contexts/BookContext'
 import { UserContext } from '@/src/contexts/UserContext'
+import { NextSeo } from 'next-seo'
 
 const bookTypes = [
   'Tudo',
@@ -51,6 +52,11 @@ export default function Explore() {
 
   return (
     <>
+      <NextSeo
+        title="Explorar | Book Wise "
+        description="Visualize e faça avaliações sobre seus livros preferidos!!"
+      />
+
       <Container>
         <SidebarSession>
           <Sidebar page={'explore'} isLoggedIn={isLoggedIn} />
@@ -119,7 +125,7 @@ export default function Explore() {
                       <Trigger>
                         <BookCard
                           bookAuthor={book.author}
-                          bookTitle={validateText.text}
+                          bookTitle={validateText!.text}
                           bookRating={ratingMedia}
                           bookImg={book.imageUrl}
                           userBookReadingId={readBookUserId[0]}
@@ -137,7 +143,7 @@ export default function Explore() {
                       <Trigger>
                         <BookCard
                           bookAuthor={book.author}
-                          bookTitle={validateText.text}
+                          bookTitle={validateText!.text}
                           bookRating={ratingMedia}
                           bookImg={book.imageUrl}
                         />
@@ -155,7 +161,7 @@ export default function Explore() {
                     <Trigger>
                       <BookCard
                         bookAuthor={book.author}
-                        bookTitle={validateText.text}
+                        bookTitle={validateText!.text}
                         bookRating={0}
                         bookImg={book.imageUrl}
                       />

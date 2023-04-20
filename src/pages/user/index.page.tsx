@@ -2,7 +2,7 @@ import { Input } from '@/src/components/Input'
 import { Sidebar } from '@/src/components/Sidebar'
 import { UserContext } from '@/src/contexts/UserContext'
 import { UserCircle } from 'phosphor-react'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { UserCard } from './components/UserCard'
 import { UserCommentBox } from './components/UserCommentBox'
 import {
@@ -21,7 +21,7 @@ import { NextSeo } from 'next-seo'
 import { EmptyUserAvaliation } from '@/src/components/EmptyUserAvaliation'
 
 export default function User() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const isLoggedIn = true
   const { loggedUserAvaliations, selectUserAvaliations } =
     useContext(UserContext)
 

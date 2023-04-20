@@ -24,7 +24,7 @@ export function Input({ inputPage }: InputProps) {
   })
 
   const { getBookByTheName } = useContext(BookContext)
-  const { handleSearchUserAvaliation, loggedUser } = useContext(UserContext)
+  const { handleSearchUserAvaliation } = useContext(UserContext)
 
   function handleSearchABook(data: SearchFormInputs) {
     if (inputPage === 'explore') {

@@ -51,7 +51,7 @@ interface TopThreeBooksProps {
 }
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const isLoggedIn = false
   const [userComment, setUserComment] = useState({} as AvaliationCommentsProps)
   const [comments, setComments] = useState<AvaliationCommentsProps[]>(
     [] as AvaliationCommentsProps[],

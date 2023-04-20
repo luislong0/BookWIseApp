@@ -38,7 +38,7 @@ export default function Explore() {
   const { books, getAllBooks, getBookByCategory } = useContext(BookContext)
   const { loggedUser } = useContext(UserContext)
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const isLoggedIn = true
   const [selectedType, setSelectedType] = useState('Tudo')
 
   function handleSelectType(type: string) {

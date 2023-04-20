@@ -28,7 +28,7 @@ export default function Login() {
     if (session.data) {
       router.push('/home')
     }
-  }, [session])
+  }, [router, session])
 
   return (
     <>

@@ -48,6 +48,7 @@ export default function Explore() {
 
   useEffect(() => {
     getAllBooks()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

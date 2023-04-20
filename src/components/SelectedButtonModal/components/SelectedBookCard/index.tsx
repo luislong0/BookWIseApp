@@ -31,6 +31,7 @@ export function SelectedButtonCard({ bookId }: SelectedButtonCardProps) {
   useEffect(() => {
     getBookById(bookId)
     getSelectedBookRating(bookId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookId])
 
   return (

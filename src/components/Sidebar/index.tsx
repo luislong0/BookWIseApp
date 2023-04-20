@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Binoculars, House, SignIn, SignOut, User } from 'phosphor-react'
+import { Binoculars, House, SignOut, User } from 'phosphor-react'
 import {
   LogoContainer,
   SidebarContainer,

@@ -18,7 +18,6 @@ export function LoginButton({
   loginType,
 }: LoginButtonProps) {
   const router = useRouter()
-  const session = useSession()
 
   async function handleLogin(option: string) {
     if (option === 'visitant') {

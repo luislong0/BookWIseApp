@@ -8,7 +8,7 @@ import {
   LoginContainer,
 } from './styles'
 
-import loginBanner from '../../assets/image.svg'
+import loginBanner from '../../assets/loginImg.svg'
 import googleIcon from '../../assets/logos_google-icon.svg'
 
 import { LoginButton } from '@/src/components/LoginButton'

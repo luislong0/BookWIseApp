@@ -21,6 +21,8 @@ import {
   TrendingBooksTitle,
 } from './styles'
 import { NextSeo } from 'next-seo'
+import { EmptyUserAvaliation } from '@/src/components/EmptyUserAvaliation'
+import { EmptyAvaliations } from '@/src/components/EmptyAvaliations'
 
 interface AvaliationCommentsProps {
   id: string
@@ -61,8 +63,8 @@ export default function Home() {
 
   async function getAllComments() {
     const response = await api.get(`/avaliation/home`, {})
+
     setComments(response.data.avaliations)
-    console.log('ALLCOMMENT: ', response.data.avaliations)
   }
 
   async function getUniqueUserComment(userId: string) {
@@ -71,15 +73,12 @@ export default function Home() {
     })
 
     setUserComment(response.data.avaliation)
-
-    console.log('USERCOMMENT: ', response.data.avaliation)
   }
 
   async function getTopThreeBooks() {
     const response = await api.get(`/book/top3`, {})
 
     setTopThreeBooks(response.data.topBooksParsed)
-    console.log('TOP3BOOKS: ' + JSON.stringify(response.data.topBooksParsed))
   }
 
   useEffect(() => {
@@ -118,34 +117,43 @@ export default function Home() {
                       <CaretRight size={16} weight="bold" />
                     </HeaderLink>
                   </TitleBox>
-                  <LastReadingComment
-                    bookImage={userComment.Book?.imageUrl!}
-                    bookAuthor={userComment.Book?.author!}
-                    bookComment={userComment.comment}
-                    bookRating={userComment.ratingNumber!}
-                    bookTitle={userComment.Book?.title!}
-                    createdAt={userComment.created_at!}
-                  />
+                  {userComment !== null ? (
+                    <LastReadingComment
+                      bookImage={userComment.Book?.imageUrl!}
+                      bookAuthor={userComment.Book?.author!}
+                      bookComment={userComment.comment}
+                      bookRating={userComment.ratingNumber!}
+                      bookTitle={userComment.Book?.title!}
+                      createdAt={userComment.created_at!}
+                    />
+                  ) : (
+                    <EmptyUserAvaliation />
+                  )}
                 </LastReadingContainer>
               )}
 
               <RecentBooksContainer>
                 <span>Avaliações mais recentes</span>
-                {comments.map((comment, i) => {
-                  return (
-                    <BookCommentBox
-                      key={comment.id}
-                      bookAuthor={comment.Book?.author!}
-                      bookComment={comment.comment}
-                      bookImage={comment.Book?.imageUrl!}
-                      bookTitle={comment.Book?.title!}
-                      createdAt={comment.created_at}
-                      ratingNumber={comment.ratingNumber}
-                      userName={comment.User?.name!}
-                      userPhoto={comment.User?.image!}
-                    />
-                  )
-                })}
+
+                {comments.length !== 0 ? (
+                  comments.map((comment, i) => {
+                    return (
+                      <BookCommentBox
+                        key={comment.id}
+                        bookAuthor={comment.Book?.author!}
+                        bookComment={comment.comment}
+                        bookImage={comment.Book?.imageUrl!}
+                        bookTitle={comment.Book?.title!}
+                        createdAt={comment.created_at}
+                        ratingNumber={comment.ratingNumber}
+                        userName={comment.User?.name!}
+                        userPhoto={comment.User?.image!}
+                      />
+                    )
+                  })
+                ) : (
+                  <EmptyAvaliations />
+                )}
               </RecentBooksContainer>
             </MyBooksContainer>
             <TrendingBooksContainer>

@@ -20,13 +20,13 @@ export default function App({
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <UserContextProvider>
-        <BookContextProvider>
+      <BookContextProvider>
+        <UserContextProvider>
           <main className={nunito.className}>
             <Component {...pageProps} />
           </main>
-        </BookContextProvider>
-      </UserContextProvider>
+        </UserContextProvider>
+      </BookContextProvider>
       <ToastContainer
         position="top-right"
         autoClose={5000}

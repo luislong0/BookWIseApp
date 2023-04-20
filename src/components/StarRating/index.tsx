@@ -7,7 +7,6 @@ interface StarRatingProps {
 
 export function StarRating({ ratingNumber }: StarRatingProps) {
   const ratingStarArray = Array.from({ length: 5 }, (_, i) => i + 1)
-  // console.log(ratingStarArray)
 
   return (
     <StarRatingBox>

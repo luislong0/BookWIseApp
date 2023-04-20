@@ -42,11 +42,6 @@ export function CommentForm({
   const { loggedUser } = useContext(UserContext)
 
   async function handleMakeAComment(data: CommentFormInput) {
-    console.log({
-      user: 'testUser',
-      comment: data.comment,
-      bookRating: bookCommentRating,
-    })
     handleHideCommentForm()
 
     try {

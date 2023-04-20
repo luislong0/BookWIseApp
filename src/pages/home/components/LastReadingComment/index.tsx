@@ -9,7 +9,6 @@ import {
 
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
-import { useState } from 'react'
 import { getLimitedText } from '@/src/utils/getLimitedText'
 
 interface LastReadingCommentProps {

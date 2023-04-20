@@ -1,6 +1,13 @@
 import { useSession } from 'next-auth/react'
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { api } from '../lib/axios'
+import { BookContext } from './BookContext'
 // import { api } from '../lib/axios'
 
 interface LoggedUserProps {
@@ -94,14 +101,12 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   >([])
 
   const session = useSession()
+  const { updateCommentsToggle } = useContext(BookContext)
 
   async function getLoggedUserInfo(userName: string) {
-    console.log(JSON.stringify(userName))
     const response = await api.get(`/user`, {
       params: { userName },
     })
-
-    console.log(response.data.user)
 
     setLoggedUser(response.data.user)
   }
@@ -124,29 +129,22 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       booksCount: booksResponse.data.booksCount,
       mostCategory: booksResponse.data.mostCategory,
     })
-
-    console.log('LoggedUserBookInfo: ' + loggedUserBookInfo)
   }
 
   async function getLoggedUserAvaliations(userName: string) {
-    console.log(JSON.stringify(userName))
     const response = await api.get(`/avaliation/user`, {
       params: { userName },
     })
-
-    console.log(response.data.userAvaliations)
 
     setLoggedUserAvaliations(response.data.userAvaliations)
   }
 
   async function handleSearchUserAvaliation(query: string) {
-    console.log('QUERY: ' + query)
     const response = await api.get(
       `/avaliation/bookname?userName=${loggedUser.id}&query=${query}`,
       {},
     )
 
-    console.log(response.data.book)
     setSelectUserAvaliations(response.data.book)
   }
 
@@ -156,7 +154,12 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
       getLoggedUserBooksInfo(session.data?.user!.name!)
       getLoggedUserAvaliations(session.data?.user!.name!)
     }
-  }, [session])
+  }, [
+    session,
+    setLoggedUserAvaliations,
+    setSelectUserAvaliations,
+    updateCommentsToggle,
+  ])
 
   return (
     <UserContext.Provider

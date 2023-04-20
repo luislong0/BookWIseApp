@@ -43,8 +43,6 @@ export default async function handler(
     },
   })
 
-  console.log(JSON.stringify(avaliations[0].avaliations))
-
   const userAvaliations = avaliations[0].avaliations.map((avaliation) => {
     return {
       avaliation,

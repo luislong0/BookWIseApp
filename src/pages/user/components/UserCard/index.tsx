@@ -15,7 +15,6 @@ import {
 
 export function UserCard() {
   const session = useSession()
-  console.log(session.data?.user!.name)
 
   const { loggedUserBookInfo, loggedUser } = useContext(UserContext)
 

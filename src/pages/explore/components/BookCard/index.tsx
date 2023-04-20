@@ -29,12 +29,7 @@ export function BookCard({
   const session = useSession()
 
   return (
-    <BookCardContainer
-      onClick={() => {
-        console.log(userBookReadingId);
-        console.log(typeof userBookReadingId);
-      }}
-    >
+    <BookCardContainer onClick={() => {}}>
       <Image src={bookImg} alt="book image" width={108} height={152} />
       <BookInfoContainer>
         <TitleBox>
@@ -51,5 +46,5 @@ export function BookCard({
         )}
       </BookInfoContainer>
     </BookCardContainer>
-  );
+  )
 }

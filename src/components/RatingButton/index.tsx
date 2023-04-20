@@ -17,7 +17,6 @@ export function RatingButton() {
 
   function handleMakeVote(ratingVote: number) {
     handleSetBookRating(ratingVote)
-    console.log('ratingVote:', ratingVote)
   }
 
   return (

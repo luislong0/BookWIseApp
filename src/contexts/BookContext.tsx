@@ -75,8 +75,6 @@ export function BookContextProvider({ children }: BookContextProviderProps) {
       params: { bookTitle: bookName },
     })
 
-    console.log(response.data.book)
-
     setBooks(response.data.book)
   }
 
@@ -84,8 +82,6 @@ export function BookContextProvider({ children }: BookContextProviderProps) {
     const response = await api.get(`/book/id`, {
       params: { bookId },
     })
-
-    console.log(response.data.book)
 
     setSelectedBook(response.data.book)
   }

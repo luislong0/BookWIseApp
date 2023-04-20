@@ -18,6 +18,7 @@ import {
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
+import { EmptyUserAvaliation } from '@/src/components/EmptyUserAvaliation'
 
 export default function User() {
   const [isLoggedIn, setIsLoggedIn] = useState(true)
@@ -32,8 +33,6 @@ export default function User() {
       router.push('/home')
     }
   }
-
-  console.log(selectUserAvaliations)
 
   return (
     <>
@@ -58,36 +57,41 @@ export default function User() {
               <BookFormContainer>
                 <Input inputPage="user" />
               </BookFormContainer>
-
-              <BookBox>
-                {selectUserAvaliations.length === 0
-                  ? loggedUserAvaliations.map((avaliation) => {
-                      return (
-                        <UserCommentBox
-                          key={avaliation.avaliation.id}
-                          bookAuthor={avaliation.avaliation.Book.author}
-                          bookImage={avaliation.avaliation.Book.imageUrl}
-                          bookTitle={avaliation.avaliation.Book.title}
-                          comment={avaliation.avaliation.comment}
-                          createdAt={new Date(avaliation.avaliation.created_at)}
-                          rating={avaliation.avaliation.ratingNumber}
-                        />
-                      )
-                    })
-                  : selectUserAvaliations.map((avaliation) => {
-                      return (
-                        <UserCommentBox
-                          key={avaliation.id}
-                          bookAuthor={avaliation.Book.author}
-                          bookImage={avaliation.Book.imageUrl}
-                          bookTitle={avaliation.Book.title}
-                          comment={avaliation.comment}
-                          createdAt={new Date(avaliation.created_at)}
-                          rating={avaliation.ratingNumber}
-                        />
-                      )
-                    })}
-              </BookBox>
+              {loggedUserAvaliations.length === 0 ? (
+                <EmptyUserAvaliation />
+              ) : (
+                <BookBox>
+                  {selectUserAvaliations.length === 0
+                    ? loggedUserAvaliations.map((avaliation) => {
+                        return (
+                          <UserCommentBox
+                            key={avaliation.avaliation.id}
+                            bookAuthor={avaliation.avaliation.Book.author}
+                            bookImage={avaliation.avaliation.Book.imageUrl}
+                            bookTitle={avaliation.avaliation.Book.title}
+                            comment={avaliation.avaliation.comment}
+                            createdAt={
+                              new Date(avaliation.avaliation.created_at)
+                            }
+                            rating={avaliation.avaliation.ratingNumber}
+                          />
+                        )
+                      })
+                    : selectUserAvaliations.map((avaliation) => {
+                        return (
+                          <UserCommentBox
+                            key={avaliation.id}
+                            bookAuthor={avaliation.Book.author}
+                            bookImage={avaliation.Book.imageUrl}
+                            bookTitle={avaliation.Book.title}
+                            comment={avaliation.comment}
+                            createdAt={new Date(avaliation.created_at)}
+                            rating={avaliation.ratingNumber}
+                          />
+                        )
+                      })}
+                </BookBox>
+              )}
             </MyBooksContainer>
             <UserInfoContainer>
               <UserCard />

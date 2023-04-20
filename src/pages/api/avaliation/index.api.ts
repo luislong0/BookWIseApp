@@ -19,14 +19,6 @@ export default async function handler(
     const { userId, bookId, comment, ratingNumber } =
       createCommentRatingSchema.parse(req.body)
     // return res.status(405).end()
-    console.log(
-      JSON.stringify({
-        userId,
-        bookId,
-        comment,
-        ratingNumber,
-      }),
-    )
 
     const newAvaliation = await prisma.avaliation.create({
       data: {

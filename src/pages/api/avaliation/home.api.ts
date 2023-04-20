@@ -36,7 +36,11 @@ export default async function handler(
       },
     })
 
-    return res.json({ avaliations })
+    if (avaliations.length !== 0) {
+      return res.json({ avaliations })
+    } else {
+      return res.json({ avaliations: [] })
+    }
   } else {
     const avaliation = await prisma.avaliation.findFirst({
       where: {
@@ -63,6 +67,14 @@ export default async function handler(
       take: 1,
     })
 
-    return res.json({ avaliation })
+    console.log('PEGA NO MEU HOME AVALIATIONS 2: ' + JSON.stringify(avaliation))
+
+    if (avaliation) {
+      return res.json({ avaliation })
+    } else {
+      return res.json({ avaliation: null })
+    }
+
+    // return res.json({ avaliation })
   }
 }

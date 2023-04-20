@@ -31,7 +31,6 @@ export function SelectedButtonCard({ bookId }: SelectedButtonCardProps) {
   useEffect(() => {
     getBookById(bookId)
     getSelectedBookRating(bookId)
-    console.log(selectedBookRating)
   }, [bookId])
 
   return (

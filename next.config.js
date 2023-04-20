@@ -7,6 +7,7 @@ const nextConfig = {
       'lh3.googleusercontent.com',
       'fv9-1.failiem.lv',
       'fv5-1.failiem.lv',
+      'avatars.githubusercontent.com',
     ],
   },
 }

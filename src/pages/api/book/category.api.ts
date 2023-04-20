@@ -18,8 +18,6 @@ export default async function handler(
 
   const { category } = createTransactionBodySchema.parse(req.query)
 
-  console.log('category: ' + category)
-
   const book = await prisma.book.findMany({
     where: {
       OR: [

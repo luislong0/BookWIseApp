@@ -51,22 +51,4 @@ export default async function handler(
   })
 
   return res.json({ book })
-
-  // if (bookId === 'undefined') {
-  //   return res
-  //     .status(401)
-  //     .json({ Message: 'A book id has not been established' })
-  // }
-
-  // const book = await prisma.book.findUnique({
-  //   where: {
-  //     id: bookId,
-  //   },
-  // })
-
-  // if (!book) {
-  //   return res.status(401).json({ Message: 'BookID not found' })
-  // } else {
-  //   return res.json({ book })
-  // }
 }

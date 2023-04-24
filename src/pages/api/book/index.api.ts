@@ -14,7 +14,6 @@ export default async function handler(
   }
 
   if (bookTitle === 'undefined') {
-    // const book = await prisma.book.findMany()
     const book = await prisma.book.findMany({
       include: {
         avaliations: {

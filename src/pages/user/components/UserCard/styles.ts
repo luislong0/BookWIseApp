@@ -4,7 +4,6 @@ export const UserCardContainer = styled('div', {
   borderLeft: '2px solid $gray700',
   padding: '0 3.5rem',
   width: 310,
-  // backgroundColor: 'red',
 
   display: 'flex',
   flexDirection: 'column',

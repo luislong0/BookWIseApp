@@ -14,7 +14,6 @@ export default async function handler(
   }
 
   if (userName !== 'undefined') {
-    // const book = await prisma.book.findMany()
     const user = await prisma.user.findFirst({
       where: {
         name: userName,

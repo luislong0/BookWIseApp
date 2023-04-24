@@ -5,7 +5,6 @@ export const StarButtonContent = styled('div', {
 })
 
 export const StarButton = styled('button', {
-  // display: 'flex',
   backgroundColor: 'transparent',
   color: 'transparent',
   border: 'none',

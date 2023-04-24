@@ -74,7 +74,5 @@ export default async function handler(
     } else {
       return res.json({ avaliation: null })
     }
-
-    // return res.json({ avaliation })
   }
 }

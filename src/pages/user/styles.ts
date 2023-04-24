@@ -5,8 +5,6 @@ export const Container = styled('div', {
   width: '100%',
 
   display: 'flex',
-  // justifyContent: 'center',
-  // backgroundColor: 'Red',
   margin: '20px auto 0',
 })
 

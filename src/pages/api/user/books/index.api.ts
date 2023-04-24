@@ -3,14 +3,6 @@
 import { prisma } from '@/src/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-// interface AggregateResult {
-//   _count: {
-//     book: {
-//       author: number
-//     }
-//   }[]
-// }
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -22,7 +14,6 @@ export default async function handler(
   }
 
   if (userName !== 'undefined') {
-    // const book = await prisma.book.findMany()
     const user = await prisma.user.findFirst({
       where: {
         name: userName,

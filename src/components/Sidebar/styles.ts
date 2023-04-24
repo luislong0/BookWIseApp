@@ -11,7 +11,6 @@ export const SidebarContainer = styled('div', {
 
   ul: {
     maxWidth: '8.125rem',
-    // backgroundColor: 'Red',
     listStyle: 'none',
     display: 'flex',
     flexDirection: 'column',

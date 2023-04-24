@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useState } from 'react'
 import { api } from '../lib/axios'
-// import { api } from '../lib/axios'
 
 interface AvaliationProps {
   ratingNumber: number

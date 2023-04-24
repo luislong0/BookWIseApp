@@ -14,7 +14,6 @@ export default async function handler(
   }
 
   if (userName !== 'undefined') {
-    // const book = await prisma.book.findMany()
     const response = await prisma.avaliation.groupBy({
       by: ['userId'],
       _count: {

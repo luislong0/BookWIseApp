@@ -3,7 +3,6 @@ import { styled } from '@/src/styles/stiches.config'
 export const LastReadingCommentBox = styled('div', {
   display: 'flex',
   gap: '$6',
-  // alignItems: 'center',
   justifyContent: 'space-between',
   width: 610,
 

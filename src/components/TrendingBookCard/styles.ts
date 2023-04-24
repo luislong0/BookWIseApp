@@ -2,7 +2,6 @@ import { styled } from '@/src/styles/stiches.config'
 
 export const TrendingBookCardContainer = styled('div', {
   display: 'flex',
-  // alignItems: 'center',
   gap: '$5',
 
   padding: '18px $5',

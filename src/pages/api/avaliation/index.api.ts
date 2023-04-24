@@ -18,7 +18,6 @@ export default async function handler(
   if (req.method === 'POST') {
     const { userId, bookId, comment, ratingNumber } =
       createCommentRatingSchema.parse(req.body)
-    // return res.status(405).end()
 
     const newAvaliation = await prisma.avaliation.create({
       data: {
@@ -30,30 +29,4 @@ export default async function handler(
     })
     return res.json(newAvaliation)
   }
-
-  // if (bookId === 'undefined') {
-  //   return res
-  //     .status(401)
-  //     .json({ Message: 'A book id has not been established' })
-  // }
-
-  // const avaliations = await prisma.avaliation.findMany({
-  //   where: {
-  //     bookId,
-  //   },
-  //   include: {
-  //     User: {
-  //       select: {
-  //         name: true,
-  //         image: true,
-  //       },
-  //     },
-  //   },
-  // })
-
-  // if (!avaliations) {
-  //   return res.status(401).json({ Message: 'BookID not found' })
-  // } else {
-  //   return res.json({ avaliations })
-  // }
 }

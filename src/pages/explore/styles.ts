@@ -6,7 +6,6 @@ export const Container = styled('div', {
   width: '100%',
 
   display: 'flex',
-  // justifyContent: 'center',
   margin: '0 auto',
   padding: '-20px',
   marginTop: '20px',

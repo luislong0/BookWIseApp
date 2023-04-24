@@ -3,7 +3,6 @@ import { styled } from '@/src/styles/stiches.config'
 export const InputBox = styled('div', {
   position: 'relative',
   display: 'flex',
-  // backgroundColor: 'Red',
   alignItems: 'center',
   padding: '0px 20px',
   border: '2px solid $gray500',

@@ -8,7 +8,6 @@ import {
 } from 'react'
 import { api } from '../lib/axios'
 import { BookContext } from './BookContext'
-// import { api } from '../lib/axios'
 
 interface LoggedUserProps {
   id: string

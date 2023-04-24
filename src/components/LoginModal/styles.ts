@@ -8,7 +8,6 @@ export const Overlay = styled(Dialog.Overlay, {
   height: '100vh',
   inset: 0,
   backgroundColor: 'rgba(0, 0, 0, 0.60)',
-  // backgroundColor: 'Red',
   zIndex: 2,
 })
 
